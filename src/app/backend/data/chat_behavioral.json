@@ -1,0 +1,14 @@
+[
+  {
+    "from": "AI",
+    "message": "{\"action\":\"FOLLOW_UP\",\"message\":\"Tell me about a time when you demonstrated leadership skills.\",\"user_response\":{\"strength\":\"\",\"improvement\":\"\"}}"
+  },
+  {
+    "from": "user",
+    "message": "But you got to ask me a question first, though. That's right. Yeah, so I guess we will do that. Yeah, we need to, like-"
+  },
+  {
+    "from": "AI",
+    "message": "I apologize for the oversight. Let's get started with the behavioral question: Can you tell me about a time when you had to deal with a difficult team member?"
+  }
+]
