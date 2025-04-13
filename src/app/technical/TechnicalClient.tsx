@@ -16,13 +16,24 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
   const [showMessage, setShowMessage] = useState(false);
   const [showInitialButton, setShowInitialButton] = useState(true);
   const [showPrompt, setShowPrompt] = useState(false);
+  const [llmActionState, setLlmActionState] = useState<
+    "FOLLOW_UP" | "GUIDANCE" | "READY"
+  >("FOLLOW_UP");
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Derived state to determine when to show the solution button
+  const showSolutionButton = llmActionState === "READY";
 
   useEffect(() => {
     setShowInitialButton(true);
     setShowMessage(false);
     setShowPrompt(false);
   }, []);
+
+  // Log the current action state whenever it changes
+  useEffect(() => {
+    console.log("Current LLM Action State:", llmActionState);
+  }, [llmActionState]);
 
   const handleButtonClick = async () => {
     try {
@@ -42,6 +53,12 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
     }
   };
 
+  // Handle solution button click
+  const handleSolutionClick = () => {
+    console.log("Solution button clicked - navigating to solution page");
+    window.location.href = "/step_2";
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -57,10 +74,19 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
         throw new Error("Failed to generate speech");
       }
 
+      // Get the action state from the response header
+      const actionType = response.headers.get("X-Action-Type");
+      if (actionType) {
+        console.log("Received action type from API:", actionType);
+        setLlmActionState(actionType as "FOLLOW_UP" | "GUIDANCE" | "READY");
+      } else {
+        console.warn("No X-Action-Type header received in response");
+      }
+
       const audioBlob = await response.blob();
       const url = URL.createObjectURL(audioBlob);
       setAudioUrl(url);
-      setShowMessage(true);
+      // Don't reset showMessage state here to prevent welcome message from showing again
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to generate speech");
@@ -88,6 +114,21 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
               <span className="text-xl font-semibold text-white">Bull.aio</span>
             </div>
           </Link>
+
+          {/* Solution button in header when ready
+          {showSolutionButton && (
+            <motion.button
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5 }}
+              onClick={handleSolutionClick}
+              className="flex items-center rounded-md bg-green-500 px-4 py-2 text-white transition-colors hover:bg-green-600"
+            >
+              <span className="mr-2">View Solution</span>
+              <div className="h-2 w-2 animate-pulse rounded-full bg-white"></div>
+            </motion.button>
+          )} */}
         </header>
       </div>
 
@@ -123,7 +164,6 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
               transition={{
                 duration: 0.5,
                 y: {
-                  repeat: Infinity,
                   duration: 1.5,
                   ease: "easeInOut",
                 },
@@ -248,6 +288,35 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
                   <audio controls src={audioUrl} className="w-full" />
                 </div>
               )}
+
+              {/* Solution button in prompt view when ready */}
+              {showSolutionButton && showPrompt && (
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  onClick={handleSolutionClick}
+                  className="mt-6 flex w-full items-center justify-center rounded-md bg-green-500 px-4 py-2 text-white transition-colors hover:bg-green-600"
+                >
+                  <span className="mr-2">You're ready! Start Coding!</span>
+                </motion.button>
+              )}
+
+              {/* Debug information
+              <div className="mt-8 rounded-md border border-gray-700 bg-gray-900/50 p-4">
+                <h3 className="mb-2 text-lg font-semibold">Debug Info:</h3>
+                <p>
+                  Current Action State:{" "}
+                  <span className="font-mono">{llmActionState}</span>
+                </p>
+                <p>
+                  Show Solution Button:{" "}
+                  <span className="font-mono">
+                    {showSolutionButton ? "true" : "false"}
+                  </span>
+                </p>
+              </div> */}
             </div>
           </motion.div>
         ) : null}
