@@ -101,7 +101,7 @@ export default function CodeInputWithButton({
           error instanceof Error ? error.message : String(error)
         }`,
       );
-      setIsLoading(false); // Reset loading only on error
+      setIsLoading(false); 
     }
   };
 
@@ -129,7 +129,9 @@ export default function CodeInputWithButton({
           value={codeValue}
           height="400px"
           extensions={languageExtensions[language]}
+          
           theme={oneDark}
+
           onChange={(value) => setCodeValue(value)}
           placeholder={placeholder}
           basicSetup={{
