@@ -1,320 +1,9 @@
-// // Define the chat message interface
-// "use client";
-
-// import { useState, useRef, useEffect } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
-// import Link from "next/link";
-// import SimpleAudioRecorder from "@/components/SimpleAudioRecorder";
-
-// export default function Home() {
-//   const [prompt, setPrompt] = useState("");
-//   const [audioUrl, setAudioUrl] = useState("");
-//   const [isWelcomeAudio, setIsWelcomeAudio] = useState(true);
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [showMessage, setShowMessage] = useState(false);
-//   const [showInitialButton, setShowInitialButton] = useState(true);
-//   const [showPrompt, setShowPrompt] = useState(false);
-
-//   const audioRef = useRef<HTMLAudioElement>(null);
-
-//   useEffect(() => {
-//     setShowInitialButton(true);
-//     setShowMessage(false);
-//     setShowPrompt(false);
-//   }, []);
-
-//   const handleButtonClick = async () => {
-//     try {
-//       // Start the transition sequence
-//       setShowInitialButton(false);
-//       setShowMessage(true);
-
-//       // Set welcome audio
-//       setAudioUrl("/audio/test2.mp3");
-//       setIsWelcomeAudio(true);
-
-//       // Set timer for ending the sequence
-//       setTimeout(() => {
-//         setShowMessage(false);
-//         setShowPrompt(true);
-//       }, 9000);
-//     } catch (err) {
-//       console.error("Error during transition:", err);
-//     }
-//   };
-
-//   // Handle auto-play when audioUrl changes
-//   useEffect(() => {
-//     if (audioUrl && audioRef.current) {
-//       audioRef.current.volume = 0.5;
-//       audioRef.current.play().catch((error) => {
-//         console.error("Auto-play failed:", error);
-//         // This can happen due to browser autoplay policies
-//       });
-//     }
-//   }, [audioUrl]);
-
-//   const handleSolutionClick = () => {
-//     console.log("Solution button clicked - navigating to solution page");
-//     window.location.href = "/sum-bvh";
-//   };
-
-//   // Function to handle transcription from SimpleAudioRecorder
-//   const handleTranscriptionReceived = (text: string) => {
-//     setPrompt(text);
-//     generateSpeech(text);
-//     // Optionally, you could auto-submit here if you want
-//     // handleSubmit(new Event('submit') as React.FormEvent);
-//   };
-
-//   // Modified to work directly with text, no event needed
-//   const generateSpeech = async (text: string) => {
-//     if (!text.trim()) {
-//       return; // Don't try to generate if no text
-//     }
-
-//     setIsLoading(true);
-
-//     try {
-//       const response = await fetch("../backend/api/behavioral", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({ prompt: text }),
-//       });
-
-//       if (!response.ok) {
-//         throw new Error("Failed to generate speech");
-//       }
-
-//       const audioBlob = await response.blob();
-//       const url = URL.createObjectURL(audioBlob);
-//       setIsWelcomeAudio(false);
-//       setAudioUrl(url);
-//     } catch (error) {
-//       console.error("Error:", error);
-//       alert("Failed to generate speech");
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   const handleSubmit = async (e: React.FormEvent) => {
-//     e.preventDefault();
-//     setIsLoading(true);
-
-//     try {
-//       const response = await fetch("../backend/api/behavioral", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({ prompt }),
-//       });
-
-//       if (!response.ok) {
-//         throw new Error("Failed to generate speech");
-//       }
-
-//       const audioBlob = await response.blob();
-//       const url = URL.createObjectURL(audioBlob);
-//       setIsWelcomeAudio(false);
-//       setAudioUrl(url);
-//     } catch (error) {
-//       console.error("Error:", error);
-//       alert("Failed to generate speech");
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-black">
-//       <div className="mx-auto w-full max-w-7xl px-4">
-//         <header className="flex items-center justify-between py-6">
-//           <Link href="/">
-//             <div className="flex items-center">
-//               <div className="mr-2 h-10 w-10 rounded-full bg-[#82e0aa]"></div>
-//               <span className="text-xl font-semibold text-white">Bull.aio</span>
-//             </div>
-//           </Link>
-//         </header>
-//       </div>
-
-//       <audio
-//         ref={audioRef}
-//         src={audioUrl}
-//         preload="auto"
-//         playsInline
-//         controls={isWelcomeAudio}
-//         onError={(e) => console.error("Audio error:", e)}
-//         hidden={true}
-//       >
-//         Your browser does not support the
-//         <code>audio</code> element.
-//       </audio>
-
-//       <AnimatePresence mode="wait">
-//         {showInitialButton && (
-//           <motion.div
-//             key="initial-button"
-//             className="absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-4"
-//             initial={{ opacity: 0 }}
-//             animate={{ opacity: 1 }}
-//             exit={{ opacity: 0 }}
-//             transition={{ duration: 0.5 }}
-//             onClick={handleButtonClick}
-//           >
-//             <motion.div
-//               className="flex h-10 w-10 items-center justify-center rounded-full bg-green-400"
-//               initial={{ scale: 0 }}
-//               animate={{
-//                 scale: 1,
-//                 y: [0, 8, 0],
-//               }}
-//               exit={{ scale: 0 }}
-//               transition={{
-//                 duration: 0.5,
-//                 y: {
-//                   repeat: Infinity,
-//                   duration: 1.5,
-//                   ease: "easeInOut",
-//                 },
-//               }}
-//             ></motion.div>
-//             <motion.p
-//               className="text-lg font-medium text-white"
-//               initial={{ opacity: 0 }}
-//               animate={{
-//                 opacity: [0.7, 1, 0.7],
-//                 transition: {
-//                   repeat: Infinity,
-//                   duration: 1.5,
-//                   ease: "easeInOut",
-//                 },
-//               }}
-//             >
-//               Click me!
-//             </motion.p>
-//           </motion.div>
-//         )}
-//         {showMessage ? (
-//           <div className="absolute inset-0 flex items-center justify-center text-white">
-//             <motion.div
-//               className="space-y-4 text-center"
-//               initial={{ opacity: 0, y: 20 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               exit={{ opacity: 0, y: -20 }}
-//               transition={{ duration: 0.8 }}
-//             >
-//               <motion.h1
-//                 className="flex items-center justify-center gap-3 text-6xl font-bold"
-//                 initial={{ opacity: 0 }}
-//                 animate={{ opacity: 1 }}
-//                 transition={{ duration: 1.5 }}
-//               >
-//                 <span
-//                   className="inline-block"
-//                   style={{
-//                     opacity: showInitialButton ? 0 : 1,
-//                     transition: "opacity 1s",
-//                   }}
-//                 >
-//                   Hi there! I'm Bull.aio
-//                 </span>
-//                 <motion.div
-//                   className="h-10 w-10 rounded-full bg-green-400"
-//                   initial={{ scale: 1, x: -window.innerWidth / 2 }}
-//                   animate={{ scale: 1, x: 0 }}
-//                   transition={{
-//                     type: "spring",
-//                     stiffness: 70,
-//                     damping: 15,
-//                     delay: 0.5,
-//                     duration: 1.5,
-//                   }}
-//                 />
-//               </motion.h1>
-//               <motion.p
-//                 className="text-4xl"
-//                 initial={{ opacity: 0 }}
-//                 animate={{ opacity: 1 }}
-//                 transition={{ delay: 2.5, duration: 1.0 }}
-//               >
-//                 I'm here to help you practice for your
-//                 <br />
-//               </motion.p>
-//               <motion.p
-//                 className="text-4xl"
-//                 initial={{ opacity: 0 }}
-//                 animate={{ opacity: 1 }}
-//                 transition={{ delay: 4.5, duration: 1.5 }}
-//               >
-//                 software engineering behavioral interview
-//               </motion.p>
-//             </motion.div>
-//           </div>
-//         ) : showPrompt ? (
-//           <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-//             <h1 className="mb-4 text-2xl font-bold text-white">
-//               Behavioral Interview Practice
-//             </h1>
-//             {/* Audio Recorder Component */}
-//             <div className="mb-6 rounded-lg border border-gray-200 bg-black p-4">
-//               <h2 className="mb-2 text-xl font-semibold text-white">
-//                 Record Your Voice
-//               </h2>
-//               <SimpleAudioRecorder
-//                 onTranscriptionComplete={handleTranscriptionReceived}
-//               />
-//             </div>
-
-//             {/* Transcribed Text Display */}
-//             <div className="space-y-4">
-//               <div>
-//                 <label className="mb-1 block text-sm font-medium text-white">
-//                   Your Response:
-//                 </label>
-//                 <div className="relative">
-//                   <textarea
-//                     value={prompt}
-//                     readOnly
-//                     placeholder="Your response will appear here as you speak..."
-//                     className={`min-h-[100px] w-full rounded-lg border border-gray-300 bg-black p-3 text-white placeholder-gray-400 ${isLoading ? "bg-opacity-50" : ""}`}
-//                   />
-//                 </div>
-//               </div>
-//             </div>
-//             {/* <form onSubmit={handleSubmit}>
-//         <label>
-//           Enter Prompt:
-//           <input
-//             type="text"
-//             value={prompt}
-//             onChange={(e) => setPrompt(e.target.value)}
-//             placeholder="e.g., What else can option A do?"
-//             style={{ width: "100%", padding: "8px", margin: "10px 0" }}
-//             disabled={isLoading}
-//           />
-//         </label>
-//         <button
-//           type="submit"
-//           disabled={isLoading}
-//           style={{ padding: "8px 16px" }}
-//         >
-//           {isLoading ? "Generating..." : "Generate Speech"}
-//         </button>
-//       </form> */}
-//             {/* Hidden audio element for generated responses */}
-//           </div>
-//         ) : null}
-//       </AnimatePresence>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import SimpleAudioRecorder from "@/components/SimpleAudioRecorder";
 
 export default function Home() {
@@ -443,7 +132,8 @@ export default function Home() {
         <header className="flex items-center justify-between py-6">
           <Link href="/">
             <div className="flex items-center">
-              <div className="mr-2 h-10 w-10 rounded-full bg-[#82e0aa]"></div>
+              <Image src="/images/Bull-ishLogo.png" alt="Bull-ish Logo" width={40} height={40} className="mr-2" />
+
               <span className="text-xl font-semibold text-white">Bull.aio</span>
             </div>
           </Link>
@@ -475,7 +165,7 @@ export default function Home() {
             onClick={handleButtonClick}
           >
             <motion.div
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-green-400"
+
               initial={{ scale: 0 }}
               animate={{
                 scale: 1,
@@ -490,7 +180,10 @@ export default function Home() {
                   ease: "easeInOut",
                 },
               }}
-            ></motion.div>
+            >
+              <Image src="/images/Bull-ishLogo.png" alt="Bull-ish Logo" width={40} height={40} />
+            </motion.div>
+
             <motion.p
               className="text-lg font-medium text-white"
               initial={{ opacity: 0 }}
@@ -503,7 +196,7 @@ export default function Home() {
                 },
               }}
             >
-              Click me!
+              Let's tap to start!
             </motion.p>
           </motion.div>
         )}
@@ -517,7 +210,8 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <motion.h1
-                className="flex items-center justify-center gap-3 text-6xl font-bold"
+                className="text-4xl font-medium flex items-center justify-center gap-3"
+
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.5 }}
@@ -531,18 +225,13 @@ export default function Home() {
                 >
                   Hi there! I'm Bull.aio
                 </span>
-                <motion.div
-                  className="h-10 w-10 rounded-full bg-green-400"
+                <motion.div 
                   initial={{ scale: 1, x: -window.innerWidth / 2 }}
                   animate={{ scale: 1, x: 0 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 70,
-                    damping: 15,
-                    delay: 0.5,
-                    duration: 1.5,
-                  }}
-                />
+                  transition={{ type: "spring", stiffness: 70, damping: 15, delay: 0.5, duration: 1.5 }}
+                >
+                  <Image src="/images/Bull-ishLogo.png" alt="Bull-ish Logo" width={40} height={40} />
+                </motion.div>
               </motion.h1>
               <motion.p
                 className="text-4xl"
@@ -564,52 +253,48 @@ export default function Home() {
             </motion.div>
           </div>
         ) : showPrompt ? (
-          <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-            <h1 className="mb-4 text-2xl font-bold text-white">
-              Behavioral Interview Practice
-            </h1>
-            {/* Audio Recorder Component */}
-            <div className="mb-6 rounded-lg border border-gray-200 bg-black p-4">
-              <h2 className="mb-2 text-xl font-semibold text-white">
-                Record Your Voice
-              </h2>
-              <SimpleAudioRecorder
-                onTranscriptionComplete={handleTranscriptionReceived}
-              />
-            </div>
 
-            {/* Transcribed Text Display */}
-            <div className="space-y-4">
-              <div>
-                <label className="mb-1 block text-sm font-medium text-white">
-                  Your Response:
-                </label>
-                <div className="relative">
-                  <textarea
-                    value={prompt}
-                    readOnly
-                    placeholder="Your response will appear here as you speak..."
-                    className={`min-h-[100px] w-full rounded-lg border border-gray-300 bg-black p-3 text-white placeholder-gray-400 ${isLoading ? "bg-opacity-50" : ""}`}
-                  />
+          <div className="flex flex-col items-center justify-center" style={{ minHeight: 'calc(100vh - 88px)' }}>
+            <div className="w-full max-w-2xl mx-auto px-6 py-8 flex flex-col items-center">
+              <h1 className="text-white text-3xl font-bold mb-10 text-center">Behavioral Interview Practice</h1>
+              
+              {/* Audio Recorder Component */}
+              <div className="w-full mb-12 p-6 bg-black rounded-xl flex justify-center">
+                <SimpleAudioRecorder
+                  onTranscriptionComplete={handleTranscriptionReceived}
+                />
+              </div>
+
+              {/* Transcribed Text Display */}
+              <div className="w-full space-y-6">
+                <div>
+                  <label className="block mb-3 text-white text-lg text-center">
+                  </label>
+                  <div className="relative">
+                    <textarea
+                      ref={(textArea) => {
+                        if (textArea) {
+                          textArea.style.height = 'auto';
+                          textArea.style.height = textArea.scrollHeight + 'px';
+                        }
+                      }}
+                      value={prompt}
+                      readOnly
+                      placeholder="Your response will appear here as you speak..."
+                      className="w-full p-4 mt-1 bg-black rounded-xl border border-gray-800 text-white resize-none overflow-hidden min-h-[100px] cursor-not-allowed"
+                      style={{ boxShadow: '0 4px 32.1px 0 rgba(255, 255, 255, 0.25)' }}
+                      disabled={isLoading}
+                      rows={4}
+                    />
+                  </div>
                 </div>
+                {isLoading && (
+                  <div className="text-sm text-gray-400 text-center">
+                    Generating response...
+                  </div>
+                )}
               </div>
             </div>
-
-            {/* See Feedback button - only shown after first recording */}
-            <AnimatePresence>
-              {hasRecorded && (
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                  onClick={handleSolutionClick}
-                  className="mt-6 flex w-full items-center justify-center rounded-md bg-[#82e0aa] px-4 py-2 text-white transition-colors hover:bg-[#72d09a]"
-                >
-                  <span className="mr-2">See Feedback</span>
-                </motion.button>
-              )}
-            </AnimatePresence>
           </div>
         ) : null}
       </AnimatePresence>
