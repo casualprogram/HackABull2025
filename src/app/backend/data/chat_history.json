@@ -1,6 +1,7 @@
 [
   {
     "from": "user",
+<<<<<<< HEAD
     "message": "hello"
   },
   {
@@ -94,5 +95,12 @@
   {
     "from": "AI",
     "message": "{\n    \"action\": \"READY\",\n    \"thinking\": \"The user's approach of using nested loops and hash map technique for faster search is correct for the Two Sum problem.\",\n    \"user_solution\": {\n        \"logic\": \"Checks all pairs using a nested loop and utilizes a hash map to store elements and complements for faster search.\"\n    },\n    \"message\": \"Great job! You have the right approach. You can start coding now.\"\n}"
+=======
+    "message": "The \"2Sum\" problem, a common coding challenge, involves finding two numbers within an array that add up to a specific target value. The logic often involves iterating through the array, checking if the complement (target - current number) exists in the array, and returning the indices of the two numbers if a pair is found"
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"GUIDANCE\",\n    \"thinking\": \"User has a good understanding of the 2Sum problem and the logic involved in solving it.\",\n    \"message\": \"Great explanation of the 2Sum problem! To solve it, you can use a hashmap to store the indices of the numbers as you iterate through the array.\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
+>>>>>>> 82201da7de76388026a74f75402ee9f90a8a11e5
   }
 ]

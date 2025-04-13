@@ -1,5 +1,11 @@
 "use client";
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+import { python } from "@codemirror/lang-python";
+import { java } from "@codemirror/lang-java";
+import { oneDark } from "@codemirror/theme-one-dark";
 
 interface CodeSubmitProps {
   onSubmit?: (code: string) => void;
@@ -13,11 +19,17 @@ export default function CodeInputWithButton({
   placeholder = "Enter your code here...",
 }: CodeSubmitProps) {
   const [codeValue, setCodeValue] = useState<string>(initialValue);
-  const [analysisResult, setAnalysisResult] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [language, setLanguage] =
+    useState<keyof typeof languageExtensions>("javascript");
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
-    setCodeValue(e.target.value);
+  const router = useRouter();
+
+  // Map languages to CodeMirror extensions
+  const languageExtensions = {
+    javascript: [javascript()],
+    python: [python()],
+    java: [java()],
   };
 
   const handleSubmit = async (): Promise<void> => {
@@ -44,7 +56,7 @@ export default function CodeInputWithButton({
       if (saveResult.success) {
         console.log("Code saved successfully:", saveResult);
 
-        // After saving, analyze the code with the new API
+        // Analyze the code
         const analysisResponse = await fetch(
           "/backend/api/code_analizer/analyze",
           {
@@ -63,30 +75,33 @@ export default function CodeInputWithButton({
         const analysisResult = await analysisResponse.json();
         if (analysisResult.success) {
           console.log("Analysis completed:", analysisResult);
-          setAnalysisResult(analysisResult.analysis);
+          // Redirect to /step-3 after successful submission
+          router.push("/step-3");
         } else {
           console.error("Analysis failed:", analysisResult);
-          setAnalysisResult(
+          alert(
             "Failed to analyze code: " +
               (analysisResult.message || "Unknown error"),
           );
+          setIsLoading(false); // Reset loading only on error
         }
       } else {
         console.error("Failed to save code:", saveResult);
         alert(`Failed to save code: ${saveResult.message || "Unknown error"}`);
+        setIsLoading(false); // Reset loading only on error
       }
 
-      // Call the onSubmit prop if provided
       if (onSubmit) {
         onSubmit(codeValue);
       }
     } catch (error) {
       console.error("Error during code submission:", error);
       alert(
-        `An error occurred: ${error instanceof Error ? error.message : String(error)}`,
+        `An error occurred: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
       );
-    } finally {
-      setIsLoading(false);
+      setIsLoading(false); 
     }
   };
 
@@ -94,13 +109,40 @@ export default function CodeInputWithButton({
     <div className="mx-auto flex max-w-4xl flex-col space-y-6 p-6">
       <h2 className="text-xl font-semibold">Code Entry</h2>
       <div className="flex flex-col space-y-4">
-        <textarea
+        {/* Language Selector */}
+        <div className="flex justify-end">
+          <select
+            value={language}
+            onChange={(e) =>
+              setLanguage(e.target.value as keyof typeof languageExtensions)
+            }
+            className="rounded-md border border-gray-300 px-2 py-1"
+          >
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+          </select>
+        </div>
+
+        {/* CodeMirror Editor */}
+        <CodeMirror
           value={codeValue}
-          onChange={handleChange}
-          className="h-96 w-full rounded-md border border-gray-300 px-4 py-3 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          height="400px"
+          extensions={languageExtensions[language]}
+          
+          theme={oneDark}
+
+          onChange={(value) => setCodeValue(value)}
           placeholder={placeholder}
-          spellCheck={false}
+          basicSetup={{
+            lineNumbers: true,
+            foldGutter: true,
+            autocompletion: true,
+            indentOnInput: true,
+          }}
+          className="rounded-md border border-gray-300"
         />
+
         <div className="flex justify-end">
           <button
             onClick={handleSubmit}
@@ -111,16 +153,6 @@ export default function CodeInputWithButton({
           </button>
         </div>
       </div>
-
-      {/* Analysis Results Section */}
-      {analysisResult && (
-        <div className="mt-8 rounded-md border p-4">
-          <h3 className="mb-3 text-lg font-medium">Code Analysis Results</h3>
-          <div className="prose max-w-none rounded-md bg-gray-50 p-4 whitespace-pre-wrap">
-            {analysisResult}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

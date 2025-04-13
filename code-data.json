@@ -1,17 +1,3 @@
 {
-  "total_code": "jkj",
-  "analysis": "# Code Analysis Report\n\n## Quality Assessment\nLOW\n\n## Overall Summary\nThe code provided is incomplete and does not make sense.\n\n## Logic Analysis\nThere is no meaningful code to analyze as it only contains 'jkj'. It seems like a placeholder or a mistake.\n\n## Suggested Improvements\n- Include actual code for analysis.\n- Ensure the code snippet is correct and relevant.\n\n## Optimization Opportunities\n\n\n*Analysis generated on 4/13/2025*",
-  "raw_analysis": {
-    "quality": "LOW",
-    "message": "The code provided is incomplete and does not make sense.",
-    "analysis": {
-      "logic": "There is no meaningful code to analyze as it only contains 'jkj'. It seems like a placeholder or a mistake.",
-      "suggestions": [
-        "Include actual code for analysis.",
-        "Ensure the code snippet is correct and relevant."
-      ],
-      "optimizations": []
-    }
-  },
-  "timestamp": "2025-04-13T12:55:43.479Z"
+  "total_code": "def twosum():\n  i = 10\n  j = 5\n  k = i + j"
 }
