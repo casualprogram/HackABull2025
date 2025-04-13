@@ -1,6 +1,8 @@
 // src/app/joblisting/page.tsx
 import { promises as fs } from "fs";
 import path from "path";
+import Image from "next/image";
+import Link from "next/link";
 
 // Interface for job data
 interface Job {
@@ -275,36 +277,80 @@ export default async function JobListingPage() {
   const jobs = await fetchAndProcessJobs();
 
   return (
-    <div className="mx-auto max-w-4xl p-6">
-      <h1 className="mb-6 text-2xl font-bold">Job Listings</h1>
+    <div className="min-h-screen bg-black relative">
+      <div className="absolute top-0 left-0 w-full h-[1006px] overflow-hidden">
+        <Image
+          src="/images/StageLightBackground 1.png"
+          alt="Stage Light Background"
+          width={1920}
+          height={1080}
+          className="object-cover w-full h-full"
+          priority
+        />
+      </div>
+      
+      {/* Navigation Header */}
+      <div className="relative z-10 w-full">
+        <div className="mx-auto w-full max-w-7xl px-4">
+          <header className="flex items-center justify-between py-6">
+            <Link href="/">
+              <div className="flex items-center">
+                <Image
+                  src="/images/Bull-ishLogo.png"
+                  alt="Bull-ish Logo"
+                  width={40}
+                  height={40}
+                  className="mr-2"
+                />
+                <span className="text-xl font-semibold text-white">Bull.aio</span>
+              </div>
+            </Link>
+            <nav>
+              <ul className="flex items-center space-x-4">
+                <li>
+                  <Link href="/contact" className="text-white hover:underline">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </header>
+        </div>
+      </div>
+      
+      <div className="relative z-10 mx-auto max-w-4xl p-6 pt-[335px]">
+      <div className="text-center mb-8">
+      <h1 className="mb-3 text-8xl font-bold bg-gradient-to-b from-[#FFFFFF] from-0% to-[#96A29C] to-100% bg-clip-text text-transparent">Bull.aio Job Board</h1>
+        <p className="text-lg text-gray-400">These are all newly updated job available for our software engineering Bulls</p>
+      </div>
       {jobs.length === 0 ? (
-        <p className="text-gray-500">No job listings available.</p>
+        <p className="text-gray-400">No job listings available.</p>
       ) : (
         <div className="grid gap-6">
           {jobs.map((job, index) => (
             <div
               key={`${job.jobUrl || job.applyLink}-${index}`}
-              className="rounded-md border bg-white p-4 shadow-sm"
+              className="rounded-xl border border-gray-800 bg-black p-5 relative overflow-hidden"
             >
               {job.jobUrl ? (
                 <a
                   href={job.jobUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xl font-semibold text-blue-600 hover:underline"
+                  className="text-xl font-semibold text-white hover:text-[#5FC68C] transition-colors"
                 >
                   {job.jobTitle}
                 </a>
               ) : (
-                <h2 className="text-xl font-semibold">{job.jobTitle}</h2>
+                <h2 className="text-xl font-semibold text-white">{job.jobTitle}</h2>
               )}
-              <p className="mt-1 text-gray-700">
+              <p className="mt-2 text-gray-300">
                 {job.companyUrl ? (
                   <a
                     href={job.companyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline"
+                    className="text-white hover:underline"
                   >
                     {job.company}
                   </a>
@@ -312,12 +358,16 @@ export default async function JobListingPage() {
                   job.company
                 )}
               </p>
-              <p className="text-gray-500">{job.location}</p>
-              <p className="text-gray-500">Posted: {job.datePosted}</p>
+              <div className="mt-3 flex items-center space-x-2 text-gray-400">
+                <span>{job.location}</span>
+                <span>•</span>
+                <span>Posted: {job.datePosted}</span>
+              </div>
             </div>
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 }
