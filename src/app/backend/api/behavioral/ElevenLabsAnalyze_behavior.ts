@@ -104,10 +104,7 @@ export async function generateSpeech(userPrompt: string): Promise<Buffer> {
 
     // Read prompt template and behavioral questions
     const promptTemplate = await fs.readFile(PROMPT_TEMPLATE_PATH, "utf-8");
-    // const behavioralQuestions = await fs.readFile(
-    //   BEHAVIORAL_QUESTIONS_PATH,
-    //   "utf-8",
-    // );
+
     // Get a random behavioral question if this is a new conversation
     let currentQuestion = "";
     if (chatHistory.length === 0) {
@@ -148,6 +145,7 @@ export async function generateSpeech(userPrompt: string): Promise<Buffer> {
         currentQuestion = await getRandomBehavioralQuestion();
       }
     }
+
     // Format chat history for LLM context
     const formattedHistory = chatHistory
       .map((msg) => {
@@ -168,30 +166,64 @@ export async function generateSpeech(userPrompt: string): Promise<Buffer> {
     const systemPrompt = promptTemplate
       .replace("{chat_history}", formattedHistory)
       .replace("{userPrompt}", userPrompt)
-      .replace("{behavioral_questions}", currentQuestion);
+      .replace("{current_question}", currentQuestion);
 
-    // console.log("SYSTEM PROMPT FOR LLM:", systemPrompt);
+    console.log("SYSTEM PROMPT FOR LLM:", systemPrompt);
 
-    // Call OpenAI GPT-3.5-turbo
+    // Call OpenAI with function calling to ensure structured output
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-3.5-turbo-0125", // Use a model that supports function calling
       messages: [
-        {
-          role: "system",
-          content:
-            systemPrompt +
-            "\nReturn valid JSON with keys 'action' ('FOLLOW_UP', 'REFLECTION', 'COMPLETE'), 'thinking' (1 sentence), 'message' (1-2 sentences, <100 chars), 'user_response' ('strength', 'improvement'). Ensure complete JSON with no trailing commas.",
-        },
+        { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
       ],
-      max_tokens: 300, // Reduced for efficiency
+      functions: [
+        {
+          name: "provide_interview_response",
+          description: "Generate a structured interview response",
+          parameters: {
+            type: "object",
+            properties: {
+              action: {
+                type: "string",
+                enum: ["FOLLOW_UP", "REFLECTION", "COMPLETE"],
+                description: "The type of response to give",
+              },
+              thinking: {
+                type: "string",
+                description: "Internal thinking (1 sentence)",
+              },
+              message: {
+                type: "string",
+                description:
+                  "Response to the candidate (1-2 sentences, <100 chars)",
+              },
+              user_response: {
+                type: "object",
+                properties: {
+                  strength: {
+                    type: "string",
+                    description: "The strongest aspect of the user's response",
+                  },
+                  improvement: {
+                    type: "string",
+                    description:
+                      "One specific area where the user could improve",
+                  },
+                },
+                required: ["strength", "improvement"],
+              },
+            },
+            required: ["action", "message", "user_response"],
+          },
+        },
+      ],
+      function_call: { name: "provide_interview_response" },
+      max_tokens: 300,
       temperature: 0.7,
     });
 
-    const assistantMessageRaw = completion.choices[0].message.content;
-    console.log("LLM RAW RESPONSE:", assistantMessageRaw);
-
-    // Parse JSON response
+    // Extract the function arguments from the response
     let assistantMessage: LLMResponse = {
       action: "FOLLOW_UP",
       message: "",
@@ -200,41 +232,32 @@ export async function generateSpeech(userPrompt: string): Promise<Buffer> {
         improvement: "",
       },
     };
-    try {
-      if (
-        assistantMessageRaw &&
-        assistantMessageRaw.trim().startsWith("{") &&
-        assistantMessageRaw.includes('"message"')
-      ) {
-        // Sanitize JSON
-        let sanitizedRaw = assistantMessageRaw
-          .replace(/\bFALSE\b/g, "false")
-          .replace(/\bTRUE\b/g, "true")
-          // Remove trailing commas
-          .replace(/,\s*}/g, "}")
-          .replace(/,\s*$/, "");
-        // Fix unclosed JSON
-        if (!sanitizedRaw.trim().endsWith("}")) {
-          sanitizedRaw += "}";
-        }
-        console.log("SANITIZED RAW:", sanitizedRaw);
-        assistantMessage = JSON.parse(sanitizedRaw);
-        if (!assistantMessage.message) {
-          throw new Error("No 'message' field in LLM response");
-        }
-      } else {
-        throw new Error("Invalid or empty JSON response");
-      }
-    } catch (error) {
-      console.error("Failed to parse LLM response as JSON:", error);
-      // Fallback: Extract message with regex
-      if (assistantMessageRaw) {
-        const match = assistantMessageRaw.match(/"message"\s*:\s*"([^"]*)"/);
-        if (match && match[1]) {
-          assistantMessage.message = match[1].substring(0, 100);
+
+    // Parse the function call arguments
+    if (completion.choices[0].message.function_call) {
+      try {
+        const functionCall = completion.choices[0].message.function_call;
+        console.log("FUNCTION CALL:", functionCall);
+
+        if (functionCall.arguments) {
+          assistantMessage = JSON.parse(functionCall.arguments);
+          console.log("PARSED RESPONSE:", assistantMessage);
         } else {
-          assistantMessage.message = "Unable to generate a clear response";
+          throw new Error("No arguments in function call");
         }
+      } catch (error) {
+        console.error("Failed to parse function call arguments:", error);
+        assistantMessage.message =
+          "I couldn't process your response correctly. Could you please try again?";
+      }
+    } else {
+      console.warn("No function call in response");
+      // If there's a content field, try to extract a message from it
+      if (completion.choices[0].message.content) {
+        assistantMessage.message =
+          completion.choices[0].message.content.substring(0, 100);
+      } else {
+        assistantMessage.message = "Unable to generate a clear response";
       }
     }
 
@@ -242,9 +265,11 @@ export async function generateSpeech(userPrompt: string): Promise<Buffer> {
     const speechText = assistantMessage.message;
     console.log("SPEECH TEXT:", speechText);
 
-    // Store full JSON (or raw) in history
+    // Store the complete response in chat history
+    const rawResponseForHistory = JSON.stringify(assistantMessage);
+
     chatHistory.push({ from: "user", message: userPrompt });
-    chatHistory.push({ from: "AI", message: assistantMessageRaw || "" });
+    chatHistory.push({ from: "AI", message: rawResponseForHistory });
     await fs.writeFile(
       CHAT_HISTORY_PATH,
       JSON.stringify(chatHistory, null, 2),
