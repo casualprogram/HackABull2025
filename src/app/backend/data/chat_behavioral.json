@@ -5,35 +5,18 @@
   },
   {
     "from": "user",
-    "message": "Hey, what about me?"
+    "message": "Hey. How are you?"
   },
   {
     "from": "AI",
-    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"User seems eager to share their experiences. Let's proceed with the feedback.\",\n  \"message\": \"I appreciate your enthusiasm! Let's move on to the feedback.\",\n  \"user_response\": {\n    \"strength\": \"\",\n    \"improvement\": \"\"\n  }\n}"
+    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"The user seems to have gotten distracted. Let's refocus on the behavioral question.\",\n  \"message\": \"I'm here to discuss your leadership experience. Can you tell me about a time when you demonstrated leadership skills?\",\n  \"user_response\": {}\n}"
   },
   {
     "from": "user",
-    "message": "Hey, how are you? What's up?"
+    "message": "(whooshing sound)"
   },
   {
     "from": "AI",
-    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"User seems to be getting comfortable, so let's wrap up.\",\n  \"message\": \"Let's move on to the feedback on your previous response.\",\n  \"user_response\": {\n    \"strength\": \"User is friendly and engaged in conversation.\",\n    \"improvement\": \"Try to stay focused on the interview questions to make the most of our time.\"\n  }\n}"
-  },
-  {
-    "from": "user",
-    "message": "Thermi"
-  },
-  {
-    "from": "AI",
-    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"The user seems to have misunderstood the question or provided an incomplete response.\",\n  \"message\": \"It seems there might have been a misunderstanding. If you'd like to share a different example or need clarification, feel free to let me know.\",\n  \"user_response\": {\n    \"strength\": null,\n    \"improvement\": \"Please provide a response related to the behavioral question asked.\"\n  }\n}"
-  },
-  {
-    "from": "user",
-    "message": "I got you. Yeah, mm."
-  },
-  {
-    "from": "AI",
-    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"Candidate's response lacks detail and clarity.\",\n  \"message\": \"Thank you for sharing. Let's move on to the next question.\",\n  \"user_response\": {\n    \"strength\": \"Engagement in the conversation\",\n    \"improvement\": \"Providing more specific and detailed examples\"\n  }\n}"
-  },
-  {
-    "from": "user",
+    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"It seems like there was a misunderstanding. Let's redirect the conversation.\",\n    \"message\": \"I think there might have been a mistake. Let's refocus. Can you tell me about a time when you demonstrated leadership skills?\",\n    \"user_response\": {\n        \"strength\": \"\",\n        \"improvement\": \"\"\n    }\n}"
+  }
+]

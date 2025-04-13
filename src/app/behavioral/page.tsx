@@ -24,42 +24,34 @@ export default function Home() {
 
   const handleButtonClick = async () => {
     try {
-      if (audioRef.current) {
-        // Start the transition sequence
-        setShowInitialButton(false);
-        
-        // Start the welcome message animation immediately
-        setShowMessage(true);
-        
-        // Set welcome audio
-        setAudioUrl("/audio/test2.mp3");
-        setIsWelcomeAudio(true);
-        // Wait before playing audio
-        await new Promise(resolve => setTimeout(resolve, 500));
-        audioRef.current.volume = 0.5;
-        await audioRef.current.play();
-        
-        // Set timer for ending the sequence
-        setTimeout(() => {
-          setShowMessage(false);
-          setShowPrompt(true);
-        }, 9000);
-      }
+      // Start the transition sequence
+      setShowInitialButton(false);
+      setShowMessage(true);
+      
+      // Set welcome audio
+      setAudioUrl("/audio/test2.mp3");
+      setIsWelcomeAudio(true);
+      
+      // Set timer for ending the sequence
+      setTimeout(() => {
+        setShowMessage(false);
+        setShowPrompt(true);
+      }, 9000);
     } catch (err) {
-      console.error("Audio playback failed:", err);
+      console.error("Error during transition:", err);
     }
   };
 
-  // Handle auto-play when audioUrl changes (only for generated responses)
+  // Handle auto-play when audioUrl changes
   useEffect(() => {
-    if (audioUrl && audioRef.current && !isWelcomeAudio) {
+    if (audioUrl && audioRef.current) {
+      audioRef.current.volume = 0.5;
       audioRef.current.play().catch((error) => {
         console.error("Auto-play failed:", error);
         // This can happen due to browser autoplay policies
-        // We could show a message to the user here if needed
       });
     }
-  }, [audioUrl, isWelcomeAudio]);
+  }, [audioUrl]);
 
   // Function to handle transcription from SimpleAudioRecorder
   const handleTranscriptionReceived = (text: string) => {
@@ -147,6 +139,7 @@ export default function Home() {
         playsInline
         controls={isWelcomeAudio}
         onError={(e) => console.error('Audio error:', e)}
+        hidden={true}
       >
         Your browser does not support the
         <code>audio</code> element.
