@@ -117,6 +117,7 @@
   },
   {
     "from": "AI",
+    "message": "{\n    \"action\": \"READY\",\n    \"thinking\": \"The user's approach of using nested loops and hash map technique for faster search is correct for the Two Sum problem.\",\n    \"user_solution\": {\n        \"logic\": \"Checks all pairs using a nested loop and utilizes a hash map to store elements and complements for faster search.\"\n    },\n    \"message\": \"Great job! You have the right approach. You can start coding now.\"\n}"
     "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"The user seems to be unclear about their approach to solving the Two Sum problem using a hashmap.\",\n    \"message\": \"Could you please provide your logic or approach for using a hash map to solve the Two Sum problem?\",\n    \"user_solution\": {\n        \"logic\": null\n    }\n}"
   },
   {

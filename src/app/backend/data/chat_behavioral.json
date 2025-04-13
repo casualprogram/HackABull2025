@@ -37,18 +37,10 @@
   },
   {
     "from": "user",
-<<<<<<< HEAD
-    "message": "(sound of water flowing)"
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"The user seems distracted. I'll try to refocus the conversation.\",\n    \"message\": \"I noticed some background noise. Could you please share a time when you had to deal with a difficult team member?\",\n    \"user_response\": {\n        \"strength\": \"\",\n        \"improvement\": \"\"\n    }\n}"
-=======
     "message": "(clears throat)"
   },
   {
     "from": "AI",
     "message": "{\"action\": \"COMPLETE\", \"thinking\": \"User seems to have completed their response.\", \"message\": \"Thank you for sharing your experience. Let's proceed to the feedback.\", \"user_response\": {\"strength\": null, \"improvement\": null}}"
->>>>>>> 82201da7de76388026a74f75402ee9f90a8a11e5
   }
 ]
