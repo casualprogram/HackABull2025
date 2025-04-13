@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Handshake, CodeIcon } from "lucide-react";
 
 
@@ -12,7 +13,13 @@ export default function TypeOfQuestion() {
         <header className="flex justify-between items-center py-6">
           <Link href="/">
             <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-[#82e0aa] mr-2"></div>
+              <Image
+                src="/images/Bull-ishLogo.png"
+                alt="Bull-ish Logo"
+                width={40}
+                height={40}
+                className="mr-2"
+              />
               <span className="text-xl font-semibold">Bull.aio</span>
             </div>
           </Link>

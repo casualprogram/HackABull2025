@@ -1,0 +1,10 @@
+[
+  {
+    "from": "user",
+    "message": "hello hi so how do I sell this problem"
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"GUIDANCE\",\n    \"thinking\": \"User is seeking guidance on how to solve the current technical question.\",\n    \"message\": \"To solve this problem, think about using a hashmap to store the indices of the elements as you iterate through the array.\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
+  }
+]
