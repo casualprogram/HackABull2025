@@ -5,50 +5,106 @@
   },
   {
     "from": "user",
-    "message": "But you got to ask me a question first, though. That's right. Yeah, so I guess we will do that. Yeah, we need to, like-"
+    "message": "Hey, what about me?"
   },
   {
     "from": "AI",
-    "message": "I apologize for the oversight. Let's get started with the behavioral question: Can you tell me about a time when you had to deal with a difficult team member?"
+    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"User seems eager to share their experiences. Let's proceed with the feedback.\",\n  \"message\": \"I appreciate your enthusiasm! Let's move on to the feedback.\",\n  \"user_response\": {\n    \"strength\": \"\",\n    \"improvement\": \"\"\n  }\n}"
   },
   {
     "from": "user",
-    "message": "(footsteps)"
+    "message": "Hey, how are you? What's up?"
   },
   {
     "from": "AI",
-    "message": "{\"action\": \"COMPLETE\", \"thinking\": \"User seems to have finished their response.\", \"message\": \"Thank you for sharing your experience dealing with a difficult team member.\", \"user_response\": {\"strength\": \"\", \"improvement\": \"\"}}"
+    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"User seems to be getting comfortable, so let's wrap up.\",\n  \"message\": \"Let's move on to the feedback on your previous response.\",\n  \"user_response\": {\n    \"strength\": \"User is friendly and engaged in conversation.\",\n    \"improvement\": \"Try to stay focused on the interview questions to make the most of our time.\"\n  }\n}"
   },
   {
     "from": "user",
-    "message": "Hello, how are you doing today?"
+    "message": "Thermi"
   },
   {
     "from": "AI",
-    "message": "{\"action\": \"COMPLETE\", \"thinking\": \"User seems to have moved past the behavioral question.\", \"message\": \"I'm well, thank you. Let's continue with the behavioral interview. Can you tell me about a time when you had to deal with a difficult team member?\", \"user_response\": {\"strength\": \"N/A\", \"improvement\": \"N/A\"}}"
+    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"The user seems to have misunderstood the question or provided an incomplete response.\",\n  \"message\": \"It seems there might have been a misunderstanding. If you'd like to share a different example or need clarification, feel free to let me know.\",\n  \"user_response\": {\n    \"strength\": null,\n    \"improvement\": \"Please provide a response related to the behavioral question asked.\"\n  }\n}"
   },
   {
     "from": "user",
-    "message": "Mic check."
+    "message": "I got you. Yeah, mm."
   },
   {
     "from": "AI",
-    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"The candidate seems to be testing their microphone. Let's conclude the interview for this question.\",\n  \"message\": \"Thank you for participating. If you have any more questions or need further assistance, feel free to ask.\",\n  \"user_response\": {\n    \"strength\": \"N/A\",\n    \"improvement\": \"N/A\"\n  }\n}"
+    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"Candidate's response lacks detail and clarity.\",\n  \"message\": \"Thank you for sharing. Let's move on to the next question.\",\n  \"user_response\": {\n    \"strength\": \"Engagement in the conversation\",\n    \"improvement\": \"Providing more specific and detailed examples\"\n  }\n}"
   },
   {
     "from": "user",
-<<<<<<< HEAD
-    "message": "(sound of water flowing)"
+    "message": "Hey, how are you? What's up? What's up? What's up? What's up?"
   },
   {
     "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"The user seems distracted. I'll try to refocus the conversation.\",\n    \"message\": \"I noticed some background noise. Could you please share a time when you had to deal with a difficult team member?\",\n    \"user_response\": {\n        \"strength\": \"\",\n        \"improvement\": \"\"\n    }\n}"
-=======
-    "message": "(clears throat)"
+    "message": "{\n    \"action\": \"COMPLETE\",\n    \"thinking\": \"User seems to be off track. Let's conclude this question.\",\n    \"message\": \"Let's refocus on the behavioral interview. Do you have any questions or need clarification?\",\n    \"user_response\": {\n        \"strength\": null,\n        \"improvement\": null\n    }\n}"
+  },
+  {
+    "from": "user",
+    "message": "Hey, hey, hey. How are you?"
   },
   {
     "from": "AI",
-    "message": "{\"action\": \"COMPLETE\", \"thinking\": \"User seems to have completed their response.\", \"message\": \"Thank you for sharing your experience. Let's proceed to the feedback.\", \"user_response\": {\"strength\": null, \"improvement\": null}}"
->>>>>>> 82201da7de76388026a74f75402ee9f90a8a11e5
+    "message": "{\"action\": \"REFLECTION\", \"thinking\": \"The candidate seems distracted. Let's refocus on the behavioral interview.\", \"message\": \"Let's refocus on the behavioral interview. Do you have any questions or need clarification?\", \"user_response\": {\"strength\": \"\", \"improvement\": \"\"}}"
+  },
+  {
+    "from": "user",
+    "message": "Hey, hey, hey. How are you?"
+  },
+  {
+    "from": "AI",
+    "message": "{\"action\": \"COMPLETE\", \"thinking\": \"User is not engaging with the behavioral interview question.\", \"message\": \"Let's refocus on the behavioral interview. Do you have any questions or need clarification?\", \"user_response\": {\"strength\": null, \"improvement\": null}}"
+  },
+  {
+    "from": "user",
+    "message": "Yes, I would like to know how are you?"
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"COMPLETE\",\n    \"thinking\": \"User seems to be trying to engage in casual conversation. Let's conclude the interview.\",\n    \"message\": \"Thank you for asking! Let's refocus on the behavioral interview.\",\n    \"user_response\": {\n        \"strength\": \"Friendly and engaging tone.\",\n        \"improvement\": \"Maintain focus on the behavioral interview questions.\"\n    }\n}"
+  },
+  {
+    "from": "user",
+    "message": "(laughs)"
+  },
+  {
+    "from": "AI",
+    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"User seems to be in a light-hearted mood.\",\n  \"message\": \"Thank you for your response! Let's move on to the next question.\",\n  \"user_response\": {\n    \"strength\": \"Showing a positive attitude.\",\n    \"improvement\": \"Try to stay focused on the interview questions.\"\n  }\n}"
+  },
+  {
+    "from": "user",
+    "message": "La, la, la, la, la, la, la, how are you?"
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"COMPLETE\",\n    \"thinking\": \"User seems to be off track. Let's conclude this question.\",\n    \"message\": \"Thank you for asking! Let's refocus on the behavioral interview.\",\n    \"user_response\": {\n        \"strength\": \"Friendly tone\",\n        \"improvement\": \"Staying focused on the interview questions\"\n    }\n}"
+  },
+  {
+    "from": "user",
+    "message": "How are you doing? This is my first interview."
+  },
+  {
+    "from": "AI",
+    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"User is checking in on my well-being before we continue.\",\n  \"message\": \"I'm here and ready! Let's continue with the interview.\",\n  \"user_response\": {\n    \"strength\": \"Showing consideration and politeness\",\n    \"improvement\": \"Try to stay focused on the interview questions to make the most of our time.\"\n  }\n}"
+  },
+  {
+    "from": "user",
+    "message": "How are you? This is my first interview."
+  },
+  {
+    "from": "AI",
+    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"User is trying to engage in casual conversation before focusing on the interview.\",\n  \"message\": \"I'm here and ready to help you through your first interview. Let's continue with the behavioral questions.\",\n  \"user_response\": {\n    \"strength\": \"Friendly and engaging demeanor\",\n    \"improvement\": \"Remember to stay focused on the interview questions to make the most of this opportunity.\"\n  }\n}"
+  },
+  {
+    "from": "user",
+    "message": "Hello. How are you? How are you? How are you?"
+  },
+  {
+    "from": "AI",
+    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"User seems distracted but friendly. Let's complete this question.\",\n  \"message\": \"Thank you for checking in! Let's focus on the behavioral question.\",\n  \"user_response\": {\n    \"strength\": \"Friendly demeanor and engagement.\",\n    \"improvement\": \"Try to stay more focused on the interview questions.\"\n  }\n}"
   }
 ]

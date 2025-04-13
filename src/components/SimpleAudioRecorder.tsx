@@ -208,11 +208,11 @@ const SimpleAudioRecorder: React.FC<SimpleAudioRecorderProps> = ({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="text-sm text-gray-300 text-center"
+          className="text-sm text-white text-center"
         >
           {isRecording ? 'Recording in progress...' : 'Click to start recording'}
           <br />
-          or input as text below.
+          Click the microphone to record your response
         </motion.p>
       </AnimatePresence>
     </motion.div>
