@@ -10,5 +10,21 @@
   {
     "from": "AI",
     "message": "I apologize for the oversight. Let's get started with the behavioral question: Can you tell me about a time when you had to deal with a difficult team member?"
+  },
+  {
+    "from": "user",
+    "message": "(footsteps)"
+  },
+  {
+    "from": "AI",
+    "message": "{\"action\": \"COMPLETE\", \"thinking\": \"User seems to have finished their response.\", \"message\": \"Thank you for sharing your experience dealing with a difficult team member.\", \"user_response\": {\"strength\": \"\", \"improvement\": \"\"}}"
+  },
+  {
+    "from": "user",
+    "message": "Hello, how are you doing today?"
+  },
+  {
+    "from": "AI",
+    "message": "{\"action\": \"COMPLETE\", \"thinking\": \"User seems to have moved past the behavioral question.\", \"message\": \"I'm well, thank you. Let's continue with the behavioral interview. Can you tell me about a time when you had to deal with a difficult team member?\", \"user_response\": {\"strength\": \"N/A\", \"improvement\": \"N/A\"}}"
   }
 ]

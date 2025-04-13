@@ -1,7 +1,6 @@
 [
   {
     "from": "user",
-<<<<<<< HEAD
     "message": "Um, uh, this is a little bit tough. Let me think about it."
   },
   {
@@ -39,88 +38,5 @@
   {
     "from": "AI",
     "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"User seems unsure about the approach, need to clarify their logic before proceeding.\",\n    \"message\": \"Could you provide more details on how you plan to solve the problem using the nested loops?\",\n    \"user_solution\": {\n        \"logic\": \"Using two nested loops to iterate through the array elements and check if any two numbers add up to the target sum.\"\n    }\n}"
-=======
-    "message": "Hello how are you today"
-  },
-  {
-    "from": "AI",
-
-    "message": "{\n    \"action\": \"GUIDANCE\",\n    \"thinking\": \"User is starting the conversation, not related to the technical question.\",\n    \"message\": \"I'm here to help you with any technical questions you may have. Let me know if you're ready to tackle a coding challenge!\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "Is there any edge case for this question that I should be aware of"
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"GUIDANCE\",\n    \"thinking\": \"User is seeking clarification on potential edge cases for the Two Sum problem.\",\n    \"message\": \"One edge case to consider is when there are multiple pairs that sum up to the target. Make sure to handle this scenario in your algorithm.\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "give me an example run thru for this problem"
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"GUIDANCE\",\n    \"thinking\": \"User requested an example run through for the problem, which indicates a need for a step-by-step explanation.\",\n    \"message\": \"To provide you with an example run through, let's consider an array [2, 7, 11, 15] and a target of 9. Can you try to walk through the process of finding the indices of the two numbers that add up to the target?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
-
-    "message": "{\n    \"action\": \"GUIDANCE\",\n    \"thinking\": \"User may need help understanding the problem and coming up with the right approach.\",\n    \"message\": \"Let's work on the Two Sum question. Think about how you can find two numbers in the array that add up to the target.\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "fiyugoiypiypighip"
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"User's input seems to be unclear and not related to the Two Sum question. I need to ask for clarification on their approach.\",\n    \"message\": \"It seems like your response is not related to the Two Sum question. Could you please clarify your approach to solving the problem?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "Hi, my name is Yef"
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"User's response seems unrelated to the Two Sum question. Need to clarify their approach.\",\n    \"message\": \"It seems like your response is not related to the Two Sum question. Could you please clarify your approach to solving the problem?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "KHJSDFKJHSDLFHDS"
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"The user's response does not seem related to the Two Sum question. Asking for clarification on their approach.\",\n    \"message\": \"It seems like your response is not related to the Two Sum question. Could you please clarify your approach to solving the problem?\",\n    \"user_solution\": {\n        \"logic\": null\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "what do i do"
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"User seems unclear about the approach to solve the Two Sum question.\",\n    \"message\": \"Could you please share your approach or logic on how you would solve the Two Sum question?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "is it recursive?"
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"User is asking if the solution to the Two Sum question involves recursion.\",\n    \"message\": \"Could you please share your approach or logic on how you would solve the Two Sum question?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "i would create two variables first?"
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"User seems to be unclear about how they would approach the Two Sum question. I need to gather more information on their logic.\",\n    \"message\": \"Could you please provide more details on how you plan to use these two variables to solve the Two Sum question?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "hello"
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"The user seems to be unclear about the approach to solving the Two Sum question.\",\n    \"message\": \"Could you please share your approach or logic on how you would solve the Two Sum question?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
-
->>>>>>> origin/main
   }
 ]
