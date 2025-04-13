@@ -52,7 +52,7 @@ function HomePage() {
             </div>
           </Link>
           <nav>
-            <ul>
+            <ul className="flex items-center space-x-4">
               <li>
                 <Link href="/contact" className="hover:underline">
                   Contact
@@ -60,11 +60,12 @@ function HomePage() {
               </li>
               <li>
                 {loading ? null : !user ? (
-                  <ul className="flex">
-                    <li onClick={handleSignIn} className="cursor-pointer p-2">
-                      Login with Google
-                    </li>
-                  </ul>
+                  <button 
+                    onClick={handleSignIn} 
+                    className="cursor-pointer border border-[#5FC68C] px-4 py-1 rounded text-[#5FC68C] hover:bg-[#5FC68C] hover:bg-opacity-10 transition-colors"
+                  >
+                    Login with Google
+                  </button>
                 ) : (
                   <div>
                     <p>Welcome, {user.displayName}</p>
@@ -89,12 +90,22 @@ function HomePage() {
           engineers.
         </p>
 
+        <div className="flex space-x-4">
         <Link
-          href="/typeofquestion"
-          className="hover:bg-opacity-90 rounded-md bg-[#82e0aa] px-8 py-3 font-medium text-black transition-colors"
-        >
-          Start Practicing
-        </Link>
+            href="/joblisting"
+            className="rounded-md border border-[#5FC68C] px-8 py-3 font-medium text-[#5FC68C] hover:scale-105 transition-transform duration-200"
+          >
+            Today's Job
+          </Link>
+          
+          <Link
+            href="/typeofquestion"
+            className="hover:bg-opacity-90 hover:scale-105 rounded-md bg-[#82e0aa] px-8 py-3 font-medium text-black transition-all duration-200 shadow-md hover:shadow-lg"
+          >
+            Start Practicing
+          </Link>
+
+        </div>
       </main>
     </div>
   );

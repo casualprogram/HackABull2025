@@ -5,50 +5,18 @@
   },
   {
     "from": "user",
-    "message": "hello"
+    "message": "Hey. How are you?"
   },
   {
     "from": "AI",
-    "message": "{\"action\":\"FOLLOW_UP\",\"message\":\"Could you tell me about a time when you demonstrated leadership skills?\",\"user_response\":{\"strength\":\"\",\"improvement\":\"\"}}"
+    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"The user seems to have gotten distracted. Let's refocus on the behavioral question.\",\n  \"message\": \"I'm here to discuss your leadership experience. Can you tell me about a time when you demonstrated leadership skills?\",\n  \"user_response\": {}\n}"
   },
   {
     "from": "user",
-    "message": "In my previous role as a marketing manager, I led a team of five to create and execute a successful social media campaign. We set realistic goals, and by efficiently delegating tasks, we were able to reach our targets and increase engagement by 25%"
+    "message": "(whooshing sound)"
   },
   {
     "from": "AI",
-    "message": "{\"action\":\"FOLLOW_UP\",\"message\":\"That's impressive! Can you share how you handled any challenges that arose during the campaign?\",\"user_response\":{\"strength\":\"Effective delegation and goal-setting\",\"improvement\":\"Handling challenges and obstacles\"}}"
-  },
-  {
-    "from": "user",
-    "message": "hello"
-  },
-  {
-    "from": "AI",
-    "message": "{\"action\":\"FOLLOW_UP\",\"message\":\"Could you share an example of a time when you had to adapt to a new work environment?\",\"user_response\":{\"strength\":\"N/A\",\"improvement\":\"N/A\"}}"
-  },
-  {
-    "from": "user",
-    "message": "In my previous role as a marketing manager, I led a team of five to create and execute a successful social media campaign. We set realistic goals, and by efficiently delegating tasks, we were able to reach our targets and increase engagement by 25%"
-  },
-  {
-    "from": "AI",
-    "message": "{\"action\":\"FOLLOW_UP\",\"message\":\"That's impressive! Can you share how you handled any challenges that arose during the campaign?\",\"user_response\":{\"strength\":\"Successful delegation of tasks and goal-setting\",\"improvement\":\"Handling challenges and problem-solving\"}}"
-  },
-  {
-    "from": "user",
-    "message": "\nAs we dove into development, one major challenge emerged: two teammates had conflicting schedules, which made collaboration and consistent progress difficult. Additionally, midway through the sprint, we discovered that the API we planned to use for personalized productivity tips had recently deprecated a key feature we were relying on.\n\nTask:\nAs the acting team lead, I had to find a way to keep everyone aligned despite time constraints, and quickly pivot our tech stack to find a new solution — all while keeping the team motivated and confident that we could still succeed.\n\nAction:\nTo address the scheduling issue, I created an asynchronous workflow using a shared Notion board and a Slack channel with daily updates, so even if someone missed a meeting, they could catch up quickly and still contribute.\n\nRegarding the deprecated API, I led a mini spike session to explore alternatives. We ended up switching to an open-source solution and modified our code to adapt to the new format. I assigned one developer to focus solely on the integration, and I worked alongside them to make up for lost time.\n\nI also maintained open communication, being transparent about the challenges and using humor and encouragement to keep morale high.\n\nResult:\nDespite these hurdles, we delivered a complete, functioning prototype on time. Our ability to adapt and remain cohesive under pressure impressed the judges and helped secure our top-5 finish. The experience also taught our team how to work effectively in a fast-paced, unpredictable environment — and taught me the value of proactive problem-solving and empathetic leadership."
-  },
-  {
-    "from": "AI",
-    "message": "{\"action\":\"FOLLOW_UP\",\"message\":\"You handled the challenges with adaptability and effective communication. Impressive problem-solving skills.\",\"user_response\":{\"strength\":\"Adaptability and problem-solving\",\"improvement\":\"Consider discussing specific examples of how humor and encouragement were used to maintain morale.\"}}"
-  },
-  {
-    "from": "user",
-    "message": "(whistling and clapping)"
-  },
-  {
-    "from": "AI",
-    "message": "{\"action\":\"FOLLOW_UP\",\"message\":\"It seems like you're celebrating a successful outcome! Is there anything specific you'd like to share about this achievement?\",\"user_response\":{\"strength\":\"Celebrating success is important for team morale and motivation.\",\"improvement\":\"Provide more context or details about the success you're celebrating.\"}}"
+    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"It seems like there was a misunderstanding. Let's redirect the conversation.\",\n    \"message\": \"I think there might have been a mistake. Let's refocus. Can you tell me about a time when you demonstrated leadership skills?\",\n    \"user_response\": {\n        \"strength\": \"\",\n        \"improvement\": \"\"\n    }\n}"
   }
 ]
