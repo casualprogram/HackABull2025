@@ -4,6 +4,13 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { MicrophoneIcon } from "@heroicons/react/24/solid";
+
+declare global {
+  interface Window {
+    webkitSpeechRecognition: any;
+  }
+}
 
 type Props = {
   leetCodeQuestion: string;
@@ -16,10 +23,13 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
   const [showMessage, setShowMessage] = useState(false);
   const [showInitialButton, setShowInitialButton] = useState(true);
   const [showPrompt, setShowPrompt] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [transcript, setTranscript] = useState("");
   const [llmActionState, setLlmActionState] = useState<
     "FOLLOW_UP" | "GUIDANCE" | "READY"
   >("FOLLOW_UP");
   const audioRef = useRef<HTMLAudioElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   // Derived state to determine when to show the solution button
   const showSolutionButton = llmActionState === "READY";
@@ -34,6 +44,48 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
   useEffect(() => {
     console.log("Current LLM Action State:", llmActionState);
   }, [llmActionState]);
+
+  const startRecording = () => {
+    if (typeof window !== 'undefined') {
+      const SpeechRecognition = window.webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = true;
+      recognitionRef.current.interimResults = true;
+
+      recognitionRef.current.onstart = () => {
+        setIsRecording(true);
+      };
+
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = Array.from(event.results)
+          .map((result: any) => result[0].transcript)
+          .join('');
+        setTranscript(transcript);
+        setPrompt(transcript); // Update the prompt with the transcribed text
+      };
+
+      recognitionRef.current.onerror = (event: any) => {
+        console.error('Speech recognition error:', event.error);
+        setIsRecording(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsRecording(false);
+        // Auto-submit when recording ends if there's a transcript
+        if (transcript) {
+          handleSubmit();
+        }
+      };
+
+      recognitionRef.current.start();
+    }
+  };
+
+  const stopRecording = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+    }
+  };
 
   const handleButtonClick = async () => {
     try {
@@ -59,8 +111,8 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
     window.location.href = "/step_2";
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     setIsLoading(true);
 
     try {
@@ -247,47 +299,78 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-grow flex-col items-center justify-center text-white"
-            style={{ minHeight: "calc(100vh - 88px)" }}
+            className="flex flex-col items-center justify-center flex-grow text-white"
+            style={{ minHeight: 'calc(100vh - 88px)' }}
           >
-            <div className="mx-auto w-full max-w-[600px] px-4">
-              {/* Updated <h1> with white-space style */}
-              <h1
-                className="mb-4 text-2xl font-bold"
-                style={{ whiteSpace: "pre-wrap" }}
-              >
-                {leetCodeQuestion}
-              </h1>
-              <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="w-full max-w-[600px] mx-auto px-4">
+              <h1 className="text-3xl font-semibold text-center mb-4">Can you tell me about the problem?</h1>
+              <div className="text-lg text-gray-300 mb-8 text-center">{leetCodeQuestion}</div>
+              <div className="space-y-4">
+                <div className="flex flex-col items-center justify-center mb-8">
+                  <motion.button
+                    type="button"
+                    onClick={isRecording ? stopRecording : startRecording}
+                    className={`w-24 h-24 rounded-full flex items-center justify-center ${isRecording ? 'bg-red-500 hover:bg-red-600' : 'bg-[#82e0aa] hover:bg-[#72d09a]'}`}
+                    disabled={isLoading}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    animate={{
+                      scale: isRecording ? [1, 1.1, 1] : 1,
+                      transition: {
+                        duration: 1.5,
+                        repeat: isRecording ? Infinity : 0,
+                        ease: 'easeInOut'
+                      }
+                    }}
+                  >
+                    <motion.div
+                      animate={{
+                        opacity: isRecording ? [1, 0.5, 1] : 1,
+                        transition: {
+                          duration: 1.5,
+                          repeat: isRecording ? Infinity : 0,
+                          ease: 'easeInOut'
+                        }
+                      }}
+                    >
+                      <MicrophoneIcon className="w-12 h-12 text-white" />
+                    </motion.div>
+                  </motion.button>
+                  
+                  <p className="text-gray-400 text-sm mt-4 text-center">
+                    {isRecording ? 'Recording... Click to stop' : 'Click to start recording'}
+                    <br />
+                    or input as text below.
+                  </p>
+                </div>
+
                 <div>
-                  <label className="mb-2 block">
-                    Enter Prompt:
-                    <input
-                      type="text"
+                  <label className="block mb-2">
+                    Your Input:
+                    <textarea
+                      ref={(textArea) => {
+                        if (textArea) {
+                          textArea.style.height = 'auto';
+                          textArea.style.height = textArea.scrollHeight + 'px';
+                        }
+                      }}
                       value={prompt}
-                      onChange={(e) => setPrompt(e.target.value)}
-                      placeholder="e.g., What else can option A do?"
-                      className="mt-1 w-full rounded border border-gray-600 bg-gray-700 p-2 text-white"
+                      readOnly
+                      placeholder="Your answer will be display here ..."
+                      className="w-full p-2 mt-1 bg-gray-700/50 rounded border border-gray-600 text-white resize-none overflow-hidden min-h-[100px] cursor-not-allowed opacity-75"
                       disabled={isLoading}
+                      rows={4}
                     />
                   </label>
                 </div>
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full rounded-md bg-green-500 px-4 py-2 text-white transition-colors hover:bg-green-600"
-                >
-                  {isLoading ? "Generating..." : "Generate Speech"}
-                </button>
-              </form>
-              {audioUrl && (
-                <div className="mt-6 rounded bg-gray-800 p-4">
-                  <h3 className="mb-2 text-lg font-semibold">
-                    Generated Audio:
-                  </h3>
-                  <audio controls src={audioUrl} className="w-full" />
-                </div>
-              )}
+
+                {isLoading && (
+                  <div className="text-sm text-gray-400">
+                    Generating response...
+                  </div>
+                )}
+              </div>
+
 
               {/* Solution button in prompt view when ready */}
               {showSolutionButton && showPrompt && (
@@ -297,7 +380,7 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
                   exit={{ opacity: 0 }}
                   transition={{ delay: 0.5, duration: 0.5 }}
                   onClick={handleSolutionClick}
-                  className="mt-6 flex w-full items-center justify-center rounded-md bg-green-500 px-4 py-2 text-white transition-colors hover:bg-green-600"
+                  className="mt-6 flex w-full items-center justify-center rounded-md bg-[#82e0aa] px-4 py-2 text-white transition-colors hover:bg-[#72d09a]"
                 >
                   <span className="mr-2">You're ready! Start Coding!</span>
                 </motion.button>
