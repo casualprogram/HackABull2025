@@ -1,0 +1,11 @@
+{
+  "id": "b45bc366-2fe5-4ba3-9ee1-236264192cfa",
+  "from": "user",
+  "message": "Mic check.",
+  "timestamp": "2025-04-13T03:27:11.953Z",
+  "metadata": {
+    "audioFileName": "blob",
+    "audioFileType": "audio/wav",
+    "audioFileSize": 69432
+  }
+}
