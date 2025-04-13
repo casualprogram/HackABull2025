@@ -52,9 +52,29 @@ function HomePage() {
             </div>
           </Link>
           <nav>
-            <Link href="/contact" className="hover:underline">
-              Contact
-            </Link>
+            <ul>
+              <li>
+                <Link href="/contact" className="hover:underline">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                {loading ? null : !user ? (
+                  <ul className="flex">
+                    <li onClick={handleSignIn} className="cursor-pointer p-2">
+                      Login with Google
+                    </li>
+                  </ul>
+                ) : (
+                  <div>
+                    <p>Welcome, {user.displayName}</p>
+                    <p className="cursor-pointer" onClick={handleSignOut}>
+                      Sign out
+                    </p>
+                  </div>
+                )}
+              </li>
+            </ul>
           </nav>
         </header>
       </div>
