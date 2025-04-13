@@ -46,5 +46,21 @@
   {
     "from": "AI",
     "message": "{\n    \"action\": \"READY\",\n    \"thinking\": \"User has provided a clear explanation of the 2Sum problem and the correct logic involved in solving it.\",\n    \"user_solution\": {\n        \"logic\": \"Iterate through the array, check if the complement (target - current number) exists in the array, and return the indices of the two numbers if a pair is found.\"\n    },\n    \"message\": \"Great job! You have the right approach. You can start coding now.\"\n}"
+  },
+  {
+    "from": "user",
+    "message": "The \"2Sum\" problem, a common coding challenge, involves finding two numbers within an array that add up to a specific target value. The logic often involves iterating through the array, checking if the complement (target - current number) exists in the array, and returning the indices of the two numbers if a pair is found. "
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"READY\",\n    \"thinking\": \"User has provided a clear and accurate explanation of the logic behind solving the '2Sum' problem.\",\n    \"user_solution\": {\n        \"logic\": \"Iterating through the array, checking if the complement (target - current number) exists in the array, and returning the indices of the two numbers if a pair is found.\"\n    },\n    \"message\": \"Great job! You have the right approach. You can start coding now.\"\n}"
+  },
+  {
+    "from": "user",
+    "message": "The \"2Sum\" problem, a common coding challenge, involves finding two numbers within an array that add up to a specific target value. The logic often involves iterating through the array, checking if the complement (target - current number) exists in the array, and returning the indices of the two numbers if a pair is found. "
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"READY\",\n    \"thinking\": \"The user has correctly explained the logic behind the '2Sum' problem and how to approach it.\",\n    \"user_solution\": {\n        \"logic\": \"The '2Sum' problem involves iterating through the array, checking if the complement (target - current number) exists, and returning the indices of the two numbers if found.\"\n    },\n    \"message\": \"Great job! You have the right approach. You can start coding now.\"\n}"
   }
 ]

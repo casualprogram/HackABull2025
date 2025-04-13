@@ -1,5 +1,10 @@
 "use client";
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript"; // Example: JavaScript syntax
+import { python } from "@codemirror/lang-python"; // Example: Python syntax
+import { java } from "@codemirror/lang-java"; // Example: Java syntax
+import { oneDark } from "@codemirror/theme-one-dark"; // Optional dark theme
 
 interface CodeSubmitProps {
   onSubmit?: (code: string) => void;
@@ -15,9 +20,14 @@ export default function CodeInputWithButton({
   const [codeValue, setCodeValue] = useState<string>(initialValue);
   const [analysisResult, setAnalysisResult] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [language, setLanguage] =
+    useState<keyof typeof languageExtensions>("javascript"); // Default language
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
-    setCodeValue(e.target.value);
+  // Map languages to CodeMirror extensions
+  const languageExtensions = {
+    javascript: [javascript()],
+    python: [python()],
+    java: [java()],
   };
 
   const handleSubmit = async (): Promise<void> => {
@@ -76,14 +86,15 @@ export default function CodeInputWithButton({
         alert(`Failed to save code: ${saveResult.message || "Unknown error"}`);
       }
 
-      // Call the onSubmit prop if provided
       if (onSubmit) {
         onSubmit(codeValue);
       }
     } catch (error) {
       console.error("Error during code submission:", error);
       alert(
-        `An error occurred: ${error instanceof Error ? error.message : String(error)}`,
+        `An error occurred: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
       );
     } finally {
       setIsLoading(false);
@@ -94,13 +105,38 @@ export default function CodeInputWithButton({
     <div className="mx-auto flex max-w-4xl flex-col space-y-6 p-6">
       <h2 className="text-xl font-semibold">Code Entry</h2>
       <div className="flex flex-col space-y-4">
-        <textarea
+        {/* Language Selector */}
+        <div className="flex justify-end">
+          <select
+            value={language}
+            onChange={(e) =>
+              setLanguage(e.target.value as keyof typeof languageExtensions)
+            }
+            className="rounded-md border border-gray-300 px-2 py-1"
+          >
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+          </select>
+        </div>
+
+        {/* CodeMirror Editor */}
+        <CodeMirror
           value={codeValue}
-          onChange={handleChange}
-          className="h-96 w-full rounded-md border border-gray-300 px-4 py-3 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          height="400px"
+          extensions={languageExtensions[language]}
+          theme={oneDark} // Optional: dark theme
+          onChange={(value) => setCodeValue(value)}
           placeholder={placeholder}
-          spellCheck={false}
+          basicSetup={{
+            lineNumbers: true,
+            foldGutter: true,
+            autocompletion: true,
+            indentOnInput: true,
+          }}
+          className="rounded-md border border-gray-300"
         />
+
         <div className="flex justify-end">
           <button
             onClick={handleSubmit}
@@ -116,7 +152,7 @@ export default function CodeInputWithButton({
       {analysisResult && (
         <div className="mt-8 rounded-md border p-4">
           <h3 className="mb-3 text-lg font-medium">Code Analysis Results</h3>
-          <div className="prose max-w-none rounded-md bg-gray-50 p-4 whitespace-pre-wrap">
+          <div className="prose max-w-none rounded-md p-4 whitespace-pre-wrap">
             {analysisResult}
           </div>
         </div>

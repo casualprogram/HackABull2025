@@ -285,7 +285,7 @@ export default async function SummaryPage() {
     <div className="container mx-auto p-4">
       <h1 className="mb-6 text-2xl font-bold">Summary</h1>
 
-      <div className="rounded-lg bg-white p-6 shadow-md">
+      <div className="rounded-lg p-6 shadow-md">
         <div className="prose max-w-none">
           {/* Display the generated summary */}
           <div
