@@ -1,0 +1,11 @@
+{
+  "id": "7ce436d9-f28e-40f8-87ec-8155d85be562",
+  "from": "user",
+  "message": "Hello. Could you repeat the question?",
+  "timestamp": "2025-04-13T15:17:27.167Z",
+  "metadata": {
+    "audioFileName": "blob",
+    "audioFileType": "audio/wav",
+    "audioFileSize": 50681
+  }
+}

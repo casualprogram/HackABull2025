@@ -7,6 +7,7 @@ export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [audioUrl, setAudioUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [hasRecorded, setHasRecorded] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -21,12 +22,17 @@ export default function Home() {
     }
   }, [audioUrl]);
 
+  // Handle solution button click
+  const handleSolutionClick = () => {
+    console.log("Solution button clicked - navigating to solution page");
+    window.location.href = "/sum-bvh";
+  };
+
   // Function to handle transcription from SimpleAudioRecorder
   const handleTranscriptionReceived = (text: string) => {
     setPrompt(text);
     generateSpeech(text);
-    // Optionally, you could auto-submit here if you want
-    // handleSubmit(new Event('submit') as React.FormEvent);
+    setHasRecorded(true); // Set to true after first recording
   };
 
   // Modified to work directly with text, no event needed
@@ -77,6 +83,7 @@ export default function Home() {
       const audioBlob = await response.blob();
       const url = URL.createObjectURL(audioBlob);
       setAudioUrl(url);
+      setHasRecorded(true); // Also set to true if text is submitted manually
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to generate speech");
@@ -122,30 +129,26 @@ export default function Home() {
           {isLoading ? "Generating..." : "Generate Speech"}
         </button>
       </form>
-      {/* <form onSubmit={handleSubmit}>
-        <label>
-          Enter Prompt:
-          <input
-            type="text"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="e.g., What else can option A do?"
-            style={{ width: "100%", padding: "8px", margin: "10px 0" }}
-            disabled={isLoading}
-          />
-        </label>
+
+      {/* Solution button - only shown after first recording/submission */}
+      {hasRecorded && (
         <button
-          type="submit"
-          disabled={isLoading}
-          style={{ padding: "8px 16px" }}
+          onClick={handleSolutionClick}
+          className="mt-6 flex w-full items-center justify-center rounded-md bg-[#82e0aa] px-4 py-2 text-white transition-colors hover:bg-[#72d09a]"
         >
-          {isLoading ? "Generating..." : "Generate Speech"}
+          <span className="mr-2">See Feedback</span>
         </button>
-      </form> */}
+      )}
+
       {audioUrl && (
         <div style={{ marginTop: "20px" }}>
           <h3>Generated Audio:</h3>
-          <audio controls src={audioUrl} style={{ width: "100%" }} />
+          <audio
+            ref={audioRef}
+            controls
+            src={audioUrl}
+            style={{ width: "100%" }}
+          />
         </div>
       )}
     </div>
