@@ -34,5 +34,13 @@
   {
     "from": "AI",
     "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"The candidate seems to be testing their microphone. Let's conclude the interview for this question.\",\n  \"message\": \"Thank you for participating. If you have any more questions or need further assistance, feel free to ask.\",\n  \"user_response\": {\n    \"strength\": \"N/A\",\n    \"improvement\": \"N/A\"\n  }\n}"
+  },
+  {
+    "from": "user",
+    "message": "(sound of water flowing)"
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"The user seems distracted. I'll try to refocus the conversation.\",\n    \"message\": \"I noticed some background noise. Could you please share a time when you had to deal with a difficult team member?\",\n    \"user_response\": {\n        \"strength\": \"\",\n        \"improvement\": \"\"\n    }\n}"
   }
 ]

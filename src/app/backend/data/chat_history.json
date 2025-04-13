@@ -46,5 +46,53 @@
   {
     "from": "AI",
     "message": "{\n    \"action\": \"READY\",\n    \"thinking\": \"User has provided a clear explanation of the 2Sum problem and the correct logic involved in solving it.\",\n    \"user_solution\": {\n        \"logic\": \"Iterate through the array, check if the complement (target - current number) exists in the array, and return the indices of the two numbers if a pair is found.\"\n    },\n    \"message\": \"Great job! You have the right approach. You can start coding now.\"\n}"
+  },
+  {
+    "from": "user",
+    "message": "hello"
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"The user's response is unclear, so I will ask for more details to understand their approach.\",\n    \"message\": \"Could you please provide more details on how you plan to solve the Two Sum problem?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
+  },
+  {
+    "from": "user",
+    "message": "jjjjj"
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"The user's response 'jjjjj' is unclear and does not provide any information on their approach to solving the Two Sum problem.\",\n    \"message\": \"Could you please share your thoughts on how you would solve the Two Sum problem?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
+  },
+  {
+    "from": "user",
+    "message": "hhhjh"
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"User's response is unclear and does not provide a specific solution approach for the Two Sum problem.\",\n    \"message\": \"Could you please share your thoughts on how you would solve the Two Sum problem?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
+  },
+  {
+    "from": "user",
+    "message": "checks all pairs by using a nested loop, while the hash map technique stores an array's elements and their complements in a dictionary to conduct a faster search."
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"READY\",\n    \"thinking\": \"User has correctly described two common approaches for solving the Two Sum problem: using nested loops to check all pairs and using a hash map to store complements for faster search.\",\n    \"user_solution\": {\n        \"logic\": \"checks all pairs by using a nested loop and uses a hash map to store complements for faster search\"\n    },\n    \"message\": \"Great job! You have the right approach. You can start coding now.\"\n}"
+  },
+  {
+    "from": "user",
+    "message": "hello"
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"User's response is unclear and does not provide details on their approach to solve the Two Sum problem.\",\n    \"message\": \"Could you please share your thoughts on how you would solve the Two Sum problem?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
+  },
+  {
+    "from": "user",
+    "message": "checks all pairs by using a nested loop, while the hash map technique stores an array's elements and their complements in a dictionary to conduct a faster search."
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"READY\",\n    \"thinking\": \"The user's approach of using nested loops and hash map technique for faster search is correct for the Two Sum problem.\",\n    \"user_solution\": {\n        \"logic\": \"Checks all pairs using a nested loop and utilizes a hash map to store elements and complements for faster search.\"\n    },\n    \"message\": \"Great job! You have the right approach. You can start coding now.\"\n}"
   }
 ]
