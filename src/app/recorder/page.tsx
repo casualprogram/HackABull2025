@@ -125,23 +125,23 @@ export default function Home() {
   };
 
   return (
-    <motion.div 
-      className="min-h-screen flex flex-col items-center justify-center bg-black text-white p-4"
+    <motion.div
+      className="flex min-h-screen flex-col items-center justify-center bg-black p-4 text-white"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      <motion.h1 
-        className="text-4xl mb-12"
+      <motion.h1
+        className="mb-12 text-4xl"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
         Can you tell me about the problem?
       </motion.h1>
-      
-      <motion.div 
-        className="w-[855px] flex flex-col items-center gap-8"
+
+      <motion.div
+        className="flex w-[855px] flex-col items-center gap-8"
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.5 }}
@@ -150,17 +150,17 @@ export default function Home() {
           onTranscriptionComplete={handleTranscriptionReceived}
         />
 
-        <motion.div 
-          className="w-full relative"
+        <motion.div
+          className="relative w-full"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
           <motion.textarea
             style={{
-              boxShadow: '0 4px 32.1px rgba(255, 255, 255, 0.4)'
+              boxShadow: "0 4px 32.1px rgba(255, 255, 255, 0.4)",
             }}
-            className="w-[850px] h-32 bg-[#111] text-white rounded-lg p-4 pr-12 resize-none focus:outline-none focus:ring-2 focus:ring-green-500 border border-[#4E4E4E]"
+            className="h-32 w-[850px] resize-none rounded-lg border border-[#4E4E4E] bg-[#111] p-4 pr-12 text-white focus:ring-2 focus:ring-green-500 focus:outline-none"
             placeholder="Your answer will be display here ..."
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
@@ -193,12 +193,7 @@ export default function Home() {
           </motion.button>
         </motion.div>
 
-        <audio
-          ref={audioRef}
-          src={audioUrl}
-          className="hidden"
-          autoPlay
-        />
+        <audio ref={audioRef} src={audioUrl} className="hidden" autoPlay />
       </motion.div>
     </motion.div>
   );
