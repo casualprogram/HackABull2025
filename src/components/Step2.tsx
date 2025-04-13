@@ -1,6 +1,12 @@
 "use client";
 import { useState, ChangeEvent } from "react";
 
+/**
+ * Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to *`target`.
+ * You may assume that each input would have ***exactly***** one solution**, and you may not use the *same* element twice.
+ * You can return the answer in any order.
+ */
+
 interface CodeSubmitProps {
   onSubmit?: (code: string) => void;
   initialValue?: string;
@@ -21,12 +27,10 @@ export default function CodeInputWithButton({
   const handleSubmit = (): void => {
     // Handle the submission here
     console.log("Submitted code:", codeValue);
-
     // Call the onSubmit prop if provided
     if (onSubmit) {
       onSubmit(codeValue);
     }
-
     // Optional: clear the input after submission
     // setCodeValue('');
   };
