@@ -1,50 +1,10 @@
 [
   {
     "from": "user",
-    "message": "Um, uh, this is a little bit tough. Let me think about it."
+    "message": "The \"2Sum\" problem, a common coding challenge, involves finding two numbers within an array that add up to a specific target value. The logic often involves iterating through the array, checking if the complement (target - current number) exists in the array, and returning the indices of the two numbers if a pair is found"
   },
   {
     "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"The user seems unsure about their approach to solving the Two Sum question.\",\n    \"message\": \"Could you share your thoughts on how you would tackle this problem? What logic are you considering?\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "I was thinking of, like, what if I can use, uh, two for loop? Uh, the first loop, I will stay at the index and I'll do another in the s- in the loops to iterate through the next or the rest of the number until I can find the two number that add up equal sum. And, uh, I think that's just how you'd find my answers."
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"The user is attempting to use a brute force approach with two nested loops to iterate through the array. I need to confirm if this logic is correct before guiding further.\",\n    \"message\": \"Could you provide more details on how you plan to check if the two numbers add up to the target sum within your nested loops?\",\n    \"user_solution\": {\n        \"logic\": \"Using two nested loops to iterate through the array and check for two numbers that add up to the target sum.\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "Let's say I have two for loops. The first for loop will stay at the first index, the second for loop would be iterate through the rest of indexes, and I will add the first value of the first index, uh, to the second, the third, the four value indexes, until I find the sum. But basically by adding two of the value of the index."
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"The user is attempting to use a nested loop approach to find the two numbers that add up to the target sum.\",\n    \"message\": \"Could you clarify how you plan to check if the sum of the two numbers equals the target within your nested loops?\",\n    \"user_solution\": {\n        \"logic\": \"Nested loops to iterate through the array and add the values of each pair of indexes to find the sum.\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "Uh, I would do like an equal. If the sum of the two number that we found, uh, from the two loops equal the target number then we found the two index that we need to find."
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"READY\",\n    \"thinking\": \"The user has correctly identified the condition to find the two numbers that add up to the target sum.\",\n    \"user_solution\": {\n        \"logic\": \"Using two nested loops to iterate through the array and checking if the sum of the two numbers equals the target.\"\n    },\n    \"message\": \"Great job! You have the right approach. You can start coding now.\"\n}"
-  },
-  {
-    "from": "user",
-    "message": "I don't know what you're thinking."
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"User seems unsure about the approach, need to clarify their logic before proceeding.\",\n    \"message\": \"Could you provide more details on how you plan to solve the problem using the nested loops?\",\n    \"user_solution\": {\n        \"logic\": \"Using two nested loops to iterate through the array elements and check if any two numbers add up to the target sum.\"\n    }\n}"
-  },
-  {
-    "from": "user",
-    "message": "The \"2Sum\" problem, a common coding challenge, involves finding two numbers within an array that add up to a specific target value. The logic often involves iterating through the array, checking if the complement (target - current number) exists in the array, and returning the indices of the two numbers if a pair is found. "
-  },
-  {
-    "from": "AI",
-    "message": "{\n    \"action\": \"READY\",\n    \"thinking\": \"User has provided a clear explanation of the 2Sum problem and the correct logic involved in solving it.\",\n    \"user_solution\": {\n        \"logic\": \"Iterate through the array, check if the complement (target - current number) exists in the array, and return the indices of the two numbers if a pair is found.\"\n    },\n    \"message\": \"Great job! You have the right approach. You can start coding now.\"\n}"
+    "message": "{\n    \"action\": \"GUIDANCE\",\n    \"thinking\": \"User has a good understanding of the 2Sum problem and the logic involved in solving it.\",\n    \"message\": \"Great explanation of the 2Sum problem! To solve it, you can use a hashmap to store the indices of the numbers as you iterate through the array.\",\n    \"user_solution\": {\n        \"logic\": \"\"\n    }\n}"
   }
 ]
