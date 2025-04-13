@@ -1,0 +1,11 @@
+{
+  "id": "1ef4e23f-e40a-41cd-8401-22cf993ee16c",
+  "from": "user",
+  "message": "Hey, how are you? What's up?",
+  "timestamp": "2025-04-13T14:56:56.266Z",
+  "metadata": {
+    "audioFileName": "blob",
+    "audioFileType": "audio/wav",
+    "audioFileSize": 54723
+  }
+}
