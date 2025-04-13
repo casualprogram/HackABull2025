@@ -4,7 +4,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-
+import Image from "next/image";
 
 declare global {
   interface Window {
@@ -162,7 +162,13 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
         <header className="flex items-center justify-between py-6">
           <Link href="/">
             <div className="flex items-center">
-              <div className="mr-2 h-10 w-10 rounded-full bg-[#82e0aa]"></div>
+              <img
+                src="/images/Bull-ishLogo.png"
+                alt="Bull-ish Logo"
+                width={40}
+                height={40}
+                className="mr-2"
+              />
               <span className="text-xl font-semibold text-white">Bull.aio</span>
             </div>
           </Link>
@@ -206,7 +212,7 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
             onClick={handleButtonClick}
           >
             <motion.div
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-green-400"
+              className="flex h-18 w-18 items-center justify-center"
               initial={{ scale: 0 }}
               animate={{
                 scale: 1,
@@ -218,9 +224,18 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
                 y: {
                   duration: 1.5,
                   ease: "easeInOut",
+                  repeat: Infinity,
+                  repeatType: "reverse",
                 },
               }}
-            ></motion.div>
+            >
+              <Image
+                src="/images/Bull-ishLogo.png"
+                alt="Bull-ish Logo"
+                width={68}
+                height={68}
+              />
+            </motion.div>
             <motion.p
               className="text-lg font-medium text-white"
               initial={{ opacity: 0 }}
@@ -233,7 +248,7 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
                 },
               }}
             >
-              Click me!
+              Let's tap to start  !
             </motion.p>
           </motion.div>
         )}
@@ -247,7 +262,7 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
               transition={{ duration: 0.8 }}
             >
               <motion.h1
-                className="flex items-center justify-center gap-3 text-6xl font-bold"
+                className="flex items-center justify-center gap-3 text-4xl font-medium"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.5 }}
@@ -262,7 +277,7 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
                   Hi there! I'm Bull.aio
                 </span>
                 <motion.div
-                  className="h-10 w-10 rounded-full bg-green-400"
+                  className="h-12 w-12"
                   initial={{ scale: 1, x: -window.innerWidth / 2 }}
                   animate={{ scale: 1, x: 0 }}
                   transition={{
@@ -272,7 +287,14 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
                     delay: 0.5,
                     duration: 1.5,
                   }}
-                />
+                >
+                  <img
+                    src="/images/Bull-ishLogo.png"
+                    alt="Bull-ish Logo"
+                    width={68}
+                    height={68}
+                  />
+                </motion.div>
               </motion.h1>
               <motion.p
                 className="text-4xl"
@@ -289,7 +311,7 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 4.5, duration: 1.5 }}
               >
-                software engineering technical interview
+                software engineering technical interview!
               </motion.p>
             </motion.div>
           </div>
@@ -303,7 +325,7 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
             style={{ minHeight: 'calc(100vh - 88px)' }}
           >
             <div className="w-full max-w-[600px] mx-auto px-4">
-              <h1 className="text-3xl font-semibold text-center mb-4">Can you tell me about the problem?</h1>
+              <h1 className="text-3xl font-semibold text-center mb-4"> Let's try to solve this two-sum problem?</h1>
               <div className="text-lg text-gray-300 mb-8 text-center">{leetCodeQuestion}</div>
               <div className="space-y-4">
                 <div className="flex flex-col items-center justify-center mb-8">
@@ -353,13 +375,11 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
                   <p className="text-gray-400 text-sm mt-4 text-center">
                     {isRecording ? 'Recording... Click to stop' : 'Click to start recording'}
                     <br />
-                    or input as text below.
                   </p>
                 </div>
 
                 <div>
                   <label className="block mb-2">
-                    Your Input:
                     <textarea
                       ref={(textArea) => {
                         if (textArea) {
@@ -370,7 +390,8 @@ export default function TechnicalClient({ leetCodeQuestion }: Props) {
                       value={prompt}
                       readOnly
                       placeholder="Your answer will be display here ..."
-                      className="w-full p-2 mt-1 bg-gray-700/50 rounded border border-gray-600 text-white resize-none overflow-hidden min-h-[100px] cursor-not-allowed opacity-75"
+                      className="w-full p-4 mt-1 bg-black rounded-xl border border-gray-800 text-white resize-none overflow-hidden min-h-[100px] cursor-not-allowed"
+                      style={{ boxShadow: '0 4px 32.1px 0 rgba(255, 255, 255, 0.25)' }}
                       disabled={isLoading}
                       rows={4}
                     />

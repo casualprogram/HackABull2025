@@ -106,9 +106,10 @@ export default function CodeInputWithButton({
   };
 
   return (
-    <div className="mx-auto flex max-w-4xl flex-col space-y-6 p-6">
-      <h2 className="text-xl font-semibold">Code Entry</h2>
-      <div className="flex flex-col space-y-4">
+    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="mx-auto flex max-w-4xl flex-col space-y-6 p-6 w-full">
+        <h2 className="text-4xl font-semibold text-center mb-6">Now let's try to write down your code!</h2>
+        <div className="flex flex-col space-y-4">
         {/* Language Selector */}
         <div className="flex justify-end">
           <select
@@ -116,7 +117,7 @@ export default function CodeInputWithButton({
             onChange={(e) =>
               setLanguage(e.target.value as keyof typeof languageExtensions)
             }
-            className="rounded-md border border-gray-300 px-2 py-1"
+            className="rounded-md border border-gray-600 bg-gray-800 text-white px-2 py-1"
           >
             <option value="javascript">JavaScript</option>
             <option value="python">Python</option>
@@ -140,19 +141,20 @@ export default function CodeInputWithButton({
             autocompletion: true,
             indentOnInput: true,
           }}
-          className="rounded-md border border-gray-300"
+          className="rounded-md border border-gray-700 shadow-[0_4px_32px_0_rgba(255,255,255,0.25)]"
         />
 
         <div className="flex justify-end">
           <button
             onClick={handleSubmit}
             disabled={isLoading || !codeValue.trim()}
-            className="rounded-md bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none disabled:bg-blue-300"
+            className="rounded-md border border-[#5FC68C] bg-transparent px-6 py-3 font-medium text-[#5FC68C] hover:bg-[#5FC68C]/10 transition-colors focus:ring-2 focus:ring-[#5FC68C]/50 focus:outline-none disabled:opacity-50 disabled:border-gray-500 disabled:text-gray-500"
           >
-            {isLoading ? "Analyzing..." : "Done"}
+            {isLoading ? "Analyzing..." : "Submit Code"}
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 }
