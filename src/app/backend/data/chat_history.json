@@ -38,5 +38,13 @@
   {
     "from": "AI",
     "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"User seems unsure about the approach, need to clarify their logic before proceeding.\",\n    \"message\": \"Could you provide more details on how you plan to solve the problem using the nested loops?\",\n    \"user_solution\": {\n        \"logic\": \"Using two nested loops to iterate through the array elements and check if any two numbers add up to the target sum.\"\n    }\n}"
+  },
+  {
+    "from": "user",
+    "message": "The \"2Sum\" problem, a common coding challenge, involves finding two numbers within an array that add up to a specific target value. The logic often involves iterating through the array, checking if the complement (target - current number) exists in the array, and returning the indices of the two numbers if a pair is found. "
+  },
+  {
+    "from": "AI",
+    "message": "{\n    \"action\": \"READY\",\n    \"thinking\": \"User has provided a clear explanation of the 2Sum problem and the correct logic involved in solving it.\",\n    \"user_solution\": {\n        \"logic\": \"Iterate through the array, check if the complement (target - current number) exists in the array, and return the indices of the two numbers if a pair is found.\"\n    },\n    \"message\": \"Great job! You have the right approach. You can start coding now.\"\n}"
   }
 ]
