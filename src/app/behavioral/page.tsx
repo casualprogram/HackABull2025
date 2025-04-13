@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import SimpleAudioRecorder from "@/components/SimpleAudioRecorder";
 
 export default function Home() {
@@ -125,7 +126,7 @@ export default function Home() {
         <header className="flex justify-between items-center py-6">
           <Link href="/">
             <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-[#82e0aa] mr-2"></div>
+              <Image src="/images/Bull-ishLogo.png" alt="Bull-ish Logo" width={40} height={40} className="mr-2" />
               <span className="text-xl font-semibold text-white">Bull.aio</span>
             </div>
           </Link>
@@ -157,7 +158,6 @@ export default function Home() {
             onClick={handleButtonClick}
           >
             <motion.div
-              className="w-10 h-10 rounded-full flex items-center justify-center bg-green-400"
               initial={{ scale: 0 }}
               animate={{ 
                 scale: 1,
@@ -173,7 +173,7 @@ export default function Home() {
                 }
               }}
             >
-
+              <Image src="/images/Bull-ishLogo.png" alt="Bull-ish Logo" width={40} height={40} />
             </motion.div>
             <motion.p
               className="text-white text-lg font-medium"
@@ -187,7 +187,7 @@ export default function Home() {
                 }
               }}
             >
-              Click me!
+              Let's tap to start!
             </motion.p>
           </motion.div>
         )}
@@ -201,7 +201,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <motion.h1
-                className="text-6xl font-bold flex items-center justify-center gap-3"
+                className="text-4xl font-medium flex items-center justify-center gap-3"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.5 }}
@@ -213,11 +213,12 @@ export default function Home() {
                   Hi there! I'm Bull.aio
                 </span>
                 <motion.div 
-                  className="w-10 h-10 bg-green-400 rounded-full"
                   initial={{ scale: 1, x: -window.innerWidth / 2 }}
                   animate={{ scale: 1, x: 0 }}
                   transition={{ type: "spring", stiffness: 70, damping: 15, delay: 0.5, duration: 1.5 }}
-                />
+                >
+                  <Image src="/images/Bull-ishLogo.png" alt="Bull-ish Logo" width={40} height={40} />
+                </motion.div>
               </motion.h1>
               <motion.p
                 className="text-4xl"
@@ -239,54 +240,48 @@ export default function Home() {
             </motion.div>
           </div>
         ) : showPrompt ? (
-          <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-      <h1 className="text-white text-2xl font-bold mb-4">Behavioral Interview Practice</h1>
-      {/* Audio Recorder Component */}
-      <div className="mb-6 rounded-lg border border-gray-200 p-4 bg-black">
-        <h2 className="mb-2 text-xl font-semibold text-white">Record Your Voice</h2>
-        <SimpleAudioRecorder
-          onTranscriptionComplete={handleTranscriptionReceived}
-        />
-      </div>
+          <div className="flex flex-col items-center justify-center" style={{ minHeight: 'calc(100vh - 88px)' }}>
+            <div className="w-full max-w-2xl mx-auto px-6 py-8 flex flex-col items-center">
+              <h1 className="text-white text-3xl font-bold mb-10 text-center">Behavioral Interview Practice</h1>
+              
+              {/* Audio Recorder Component */}
+              <div className="w-full mb-12 p-6 bg-black rounded-xl flex justify-center">
+                <SimpleAudioRecorder
+                  onTranscriptionComplete={handleTranscriptionReceived}
+                />
+              </div>
 
-      {/* Transcribed Text Display */}
-      <div className="space-y-4">
-        <div>
-          <label className="mb-1 block text-sm font-medium text-white">
-            Your Response:
-          </label>
-          <div className="relative">
-            <textarea
-              value={prompt}
-              readOnly
-              placeholder="Your response will appear here as you speak..."
-              className={`min-h-[100px] w-full rounded-lg border border-gray-300 p-3 bg-black text-white placeholder-gray-400 ${isLoading ? 'bg-opacity-50' : ''}`}
-            />
+              {/* Transcribed Text Display */}
+              <div className="w-full space-y-6">
+                <div>
+                  <label className="block mb-3 text-white text-lg text-center">
+                  </label>
+                  <div className="relative">
+                    <textarea
+                      ref={(textArea) => {
+                        if (textArea) {
+                          textArea.style.height = 'auto';
+                          textArea.style.height = textArea.scrollHeight + 'px';
+                        }
+                      }}
+                      value={prompt}
+                      readOnly
+                      placeholder="Your response will appear here as you speak..."
+                      className="w-full p-4 mt-1 bg-black rounded-xl border border-gray-800 text-white resize-none overflow-hidden min-h-[100px] cursor-not-allowed"
+                      style={{ boxShadow: '0 4px 32.1px 0 rgba(255, 255, 255, 0.25)' }}
+                      disabled={isLoading}
+                      rows={4}
+                    />
+                  </div>
+                </div>
+                {isLoading && (
+                  <div className="text-sm text-gray-400 text-center">
+                    Generating response...
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      {/* <form onSubmit={handleSubmit}>
-        <label>
-          Enter Prompt:
-          <input
-            type="text"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="e.g., What else can option A do?"
-            style={{ width: "100%", padding: "8px", margin: "10px 0" }}
-            disabled={isLoading}
-          />
-        </label>
-        <button
-          type="submit"
-          disabled={isLoading}
-          style={{ padding: "8px 16px" }}
-        >
-          {isLoading ? "Generating..." : "Generate Speech"}
-        </button>
-      </form> */}
-      {/* Hidden audio element for generated responses */}
-    </div>
         ) : null}
       </AnimatePresence>
     </div>

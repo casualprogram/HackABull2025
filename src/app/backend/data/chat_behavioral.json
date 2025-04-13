@@ -18,5 +18,13 @@
   {
     "from": "AI",
     "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"It seems like there was a misunderstanding. Let's redirect the conversation.\",\n    \"message\": \"I think there might have been a mistake. Let's refocus. Can you tell me about a time when you demonstrated leadership skills?\",\n    \"user_response\": {\n        \"strength\": \"\",\n        \"improvement\": \"\"\n    }\n}"
+  },
+  {
+    "from": "user",
+    "message": "(thunder sound) (creaking sound)"
+  },
+  {
+    "from": "AI",
+    "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"User seems to be providing sound effects instead of answering the question.\",\n  \"message\": \"It seems like there was a misunderstanding. If you'd like to revisit the question or have any other experiences to share, feel free to let me know.\",\n  \"user_response\": {\n    \"strength\": null,\n    \"improvement\": \"Try to provide a relevant response to the behavioral question asked.\"\n  }\n}"
   }
 ]
