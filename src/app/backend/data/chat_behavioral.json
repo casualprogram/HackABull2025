@@ -18,5 +18,21 @@
   {
     "from": "AI",
     "message": "{\n    \"action\": \"FOLLOW_UP\",\n    \"thinking\": \"It seems like there was a misunderstanding. Let's redirect the conversation.\",\n    \"message\": \"I think there might have been a mistake. Let's refocus. Can you tell me about a time when you demonstrated leadership skills?\",\n    \"user_response\": {\n        \"strength\": \"\",\n        \"improvement\": \"\"\n    }\n}"
+  },
+  {
+    "from": "user",
+    "message": "Do you work? No."
+  },
+  {
+    "from": "AI",
+    "message": "{\"action\":\"COMPLETE\",\"message\":\"Thank you for your time. If you have any other questions in the future, feel free to ask!\",\"user_response\":{\"strength\":\"N/A\",\"improvement\":\"N/A\"}}"
+  },
+  {
+    "from": "user",
+    "message": "Uh, for real. Okay. Okay, good."
+  },
+  {
+    "from": "AI",
+    "message": "{\"action\":\"COMPLETE\",\"message\":\"Thank you for your time. If you have any other questions in the future, feel free to ask!\",\"user_response\":{\"strength\":\"N/A\",\"improvement\":\"N/A\"}}"
   }
 ]
