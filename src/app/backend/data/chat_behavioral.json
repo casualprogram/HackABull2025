@@ -34,5 +34,13 @@
   {
     "from": "AI",
     "message": "{\n  \"action\": \"COMPLETE\",\n  \"thinking\": \"The candidate seems to be testing their microphone. Let's conclude the interview for this question.\",\n  \"message\": \"Thank you for participating. If you have any more questions or need further assistance, feel free to ask.\",\n  \"user_response\": {\n    \"strength\": \"N/A\",\n    \"improvement\": \"N/A\"\n  }\n}"
+  },
+  {
+    "from": "user",
+    "message": "(clears throat)"
+  },
+  {
+    "from": "AI",
+    "message": "{\"action\": \"COMPLETE\", \"thinking\": \"User seems to have completed their response.\", \"message\": \"Thank you for sharing your experience. Let's proceed to the feedback.\", \"user_response\": {\"strength\": null, \"improvement\": null}}"
   }
 ]
