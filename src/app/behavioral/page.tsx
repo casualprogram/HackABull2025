@@ -14,6 +14,7 @@ export default function Home() {
   const [showMessage, setShowMessage] = useState(false);
   const [showInitialButton, setShowInitialButton] = useState(true);
   const [showPrompt, setShowPrompt] = useState(false);
+  const [hasRecorded, setHasRecorded] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -28,11 +29,11 @@ export default function Home() {
       // Start the transition sequence
       setShowInitialButton(false);
       setShowMessage(true);
-      
+
       // Set welcome audio
       setAudioUrl("/audio/test2.mp3");
       setIsWelcomeAudio(true);
-      
+
       // Set timer for ending the sequence
       setTimeout(() => {
         setShowMessage(false);
@@ -54,12 +55,16 @@ export default function Home() {
     }
   }, [audioUrl]);
 
+  const handleSolutionClick = () => {
+    console.log("Solution button clicked - navigating to solution page");
+    window.location.href = "/sum-bvh";
+  };
+
   // Function to handle transcription from SimpleAudioRecorder
   const handleTranscriptionReceived = (text: string) => {
     setPrompt(text);
     generateSpeech(text);
-    // Optionally, you could auto-submit here if you want
-    // handleSubmit(new Event('submit') as React.FormEvent);
+    setHasRecorded(true); // Set to true after first recording
   };
 
   // Modified to work directly with text, no event needed
@@ -112,6 +117,7 @@ export default function Home() {
       const url = URL.createObjectURL(audioBlob);
       setIsWelcomeAudio(false);
       setAudioUrl(url);
+      setHasRecorded(true); // Also set to true if text is submitted manually
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to generate speech");
@@ -122,11 +128,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="w-full max-w-7xl mx-auto px-4">
-        <header className="flex justify-between items-center py-6">
+      <div className="mx-auto w-full max-w-7xl px-4">
+        <header className="flex items-center justify-between py-6">
           <Link href="/">
             <div className="flex items-center">
               <Image src="/images/Bull-ishLogo.png" alt="Bull-ish Logo" width={40} height={40} className="mr-2" />
+
               <span className="text-xl font-semibold text-white">Bull.aio</span>
             </div>
           </Link>
@@ -139,18 +146,18 @@ export default function Home() {
         preload="auto"
         playsInline
         controls={isWelcomeAudio}
-        onError={(e) => console.error('Audio error:', e)}
+        onError={(e) => console.error("Audio error:", e)}
         hidden={true}
       >
         Your browser does not support the
         <code>audio</code> element.
       </audio>
-      
+
       <AnimatePresence mode="wait">
         {showInitialButton && (
           <motion.div
             key="initial-button"
-            className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer gap-4"
+            className="absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -158,10 +165,11 @@ export default function Home() {
             onClick={handleButtonClick}
           >
             <motion.div
+
               initial={{ scale: 0 }}
-              animate={{ 
+              animate={{
                 scale: 1,
-                y: [0, 8, 0]
+                y: [0, 8, 0],
               }}
               exit={{ scale: 0 }}
               transition={{
@@ -169,22 +177,23 @@ export default function Home() {
                 y: {
                   repeat: Infinity,
                   duration: 1.5,
-                  ease: "easeInOut"
-                }
+                  ease: "easeInOut",
+                },
               }}
             >
               <Image src="/images/Bull-ishLogo.png" alt="Bull-ish Logo" width={40} height={40} />
             </motion.div>
+
             <motion.p
-              className="text-white text-lg font-medium"
+              className="text-lg font-medium text-white"
               initial={{ opacity: 0 }}
-              animate={{ 
+              animate={{
                 opacity: [0.7, 1, 0.7],
                 transition: {
                   repeat: Infinity,
                   duration: 1.5,
-                  ease: "easeInOut"
-                }
+                  ease: "easeInOut",
+                },
               }}
             >
               Let's tap to start!
@@ -194,7 +203,7 @@ export default function Home() {
         {showMessage ? (
           <div className="absolute inset-0 flex items-center justify-center text-white">
             <motion.div
-              className="text-center space-y-4"
+              className="space-y-4 text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
@@ -202,13 +211,17 @@ export default function Home() {
             >
               <motion.h1
                 className="text-4xl font-medium flex items-center justify-center gap-3"
+
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.5 }}
               >
                 <span
                   className="inline-block"
-                  style={{ opacity: showInitialButton ? 0 : 1, transition: 'opacity 1s' }}
+                  style={{
+                    opacity: showInitialButton ? 0 : 1,
+                    transition: "opacity 1s",
+                  }}
                 >
                   Hi there! I'm Bull.aio
                 </span>
@@ -240,6 +253,7 @@ export default function Home() {
             </motion.div>
           </div>
         ) : showPrompt ? (
+
           <div className="flex flex-col items-center justify-center" style={{ minHeight: 'calc(100vh - 88px)' }}>
             <div className="w-full max-w-2xl mx-auto px-6 py-8 flex flex-col items-center">
               <h1 className="text-white text-3xl font-bold mb-10 text-center">Behavioral Interview Practice</h1>
